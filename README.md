@@ -56,12 +56,12 @@ StayHub
 
 3. Install dependencies:
    ```bash
-   npm install
+   yarn install
    ```
 
 4. Start the development server:
    ```bash
-   npm start
+   yarn start
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
