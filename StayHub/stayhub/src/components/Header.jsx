@@ -4,14 +4,18 @@ import logo from '../images/logo.png';
 const Header = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <div className="container"> {/* Changed container-fluid to container */}
-          {/* Logo */}
-          <a className="navbar-brand " href="/">
-            <img src={logo} alt="Logo" width="120" height="50" className="d-inline-block align-top" />
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          <a className="navbar-brand" href="/">
+            <img
+              src={logo}
+              alt="Logo"
+              width="120"
+              height="50"
+              className="d-inline-block align-top"
+            />
           </a>
 
-          {/* Navbar toggle button for mobile */}
           <button
             className="navbar-toggler"
             type="button"
@@ -24,36 +28,34 @@ const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Navbar items */}
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               {/* About Link */}
-              <li className="nav-item me-2">
-                <a className="nav-link text-white" href="#">
+              <li className="nav-item">
+                <a className="nav-link text-white" href="/about">
                   About
                 </a>
               </li>
 
               {/* Dropdown */}
-              <li className="nav-item dropdown me-2">
-                <a
+              <li className="nav-item dropdown">
+                <button
                   className="nav-link dropdown-toggle text-white"
-                  href="#"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Support
-                </a>
+                </button>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/action1">
                       Action
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/action2">
                       Another action
                     </a>
                   </li>
@@ -61,7 +63,7 @@ const Header = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/action3">
                       Something else here
                     </a>
                   </li>
@@ -71,8 +73,9 @@ const Header = () => {
               {/* Login Button */}
               <li className="nav-item">
                 <button
-                  className="btn text-white me-5"
+                  className="btn text-white px-4"
                   style={{ backgroundColor: '#FF7700' }}
+                  onClick={() => console.log('Login clicked')}
                 >
                   Login
                 </button>
