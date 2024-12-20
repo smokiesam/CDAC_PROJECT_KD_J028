@@ -12,12 +12,15 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="container-fluid" style={{backgroundColor: '#FEF4EA', minHeight: '100vh'
-}}>
+    <div className="container-fluid" style={{ backgroundColor: '#FEF4EA', minHeight: '100vh' }}>
       <div className="row justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
         {/* Left Column (Login Form) */}
-        <div className="col-md-6 col-12">
-          <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow">
+        <div className="col-md-6 col-12 d-flex justify-content-center">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white p-4 rounded shadow"
+            style={{ maxWidth: '450px', width: '100%' }} // Set a max width for the form
+          >
             <h2 className="text-center">Login</h2>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email</label>
