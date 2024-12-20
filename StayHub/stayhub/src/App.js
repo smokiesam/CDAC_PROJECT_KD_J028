@@ -11,10 +11,12 @@ const App = () => {
   return (
     <Router>
       <Header /> 
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
+      <div className="container my-4 d-flex justify-content-center align-items-center vh-100"> {/* Added container here */}
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </div>
       <Footer />
     </Router>
   );
