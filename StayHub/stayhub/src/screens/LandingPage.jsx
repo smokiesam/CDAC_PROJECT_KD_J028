@@ -5,7 +5,7 @@ function LandingPage(){
     const navigate = useNavigate();
 
     return (
-        <div className="landing-container">
+        <div className="landing-container ">
             <header className="landing-header">
                 <h1>Welcome To StayHub</h1>
                 <button className="login-button" onClick={()=>navigate('/login')}>

@@ -3,7 +3,7 @@ import logo from '../images/logo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-white mt-5 pt-4 pb-4">
+    <footer className="bg-dark text-white pt-4 pb-4">
       <div className="container">
         <div className="row">
           {/* Logo Section */}
@@ -18,10 +18,10 @@ const Footer = () => {
           <div className="col-md-3 mb-3">
             <h5>Quick Links</h5>
             <ul className="list-unstyled">
-              <li><a href="#" className="text-white text-decoration-none">Home</a></li>
-              <li><a href="#" className="text-white text-decoration-none">About</a></li>
-              <li><a href="#" className="text-white text-decoration-none">Support</a></li>
-              <li><a href="#" className="text-white text-decoration-none">Contact</a></li>
+              <li><a href="/" className="text-white text-decoration-none">Home</a></li>
+              <li><a href="/" className="text-white text-decoration-none">About</a></li>
+              <li><a href="/" className="text-white text-decoration-none">Support</a></li>
+              <li><a href="/" className="text-white text-decoration-none">Contact</a></li>
             </ul>
           </div>
 
@@ -37,10 +37,10 @@ const Footer = () => {
           <div className="col-md-3 mb-3 text-center">
             <h5>Follow Us</h5>
             <div className="d-flex justify-content-center">
-              <a href="#" className="text-white mx-2"><i className="fab fa-facebook fa-2x"></i></a>
-              <a href="#" className="text-white mx-2"><i className="fab fa-twitter fa-2x"></i></a>
-              <a href="#" className="text-white mx-2"><i className="fab fa-instagram fa-2x"></i></a>
-              <a href="#" className="text-white mx-2"><i className="fab fa-linkedin fa-2x"></i></a>
+              <a href="/" className="text-white mx-2"><i className="fab fa-facebook fa-2x"></i></a>
+              <a href="/" className="text-white mx-2"><i className="fab fa-twitter fa-2x"></i></a>
+              <a href="/" className="text-white mx-2"><i className="fab fa-instagram fa-2x"></i></a>
+              <a href="/" className="text-white mx-2"><i className="fab fa-linkedin fa-2x"></i></a>
             </div>
           </div>
         </div>
