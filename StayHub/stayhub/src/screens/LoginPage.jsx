@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import login_png from '../images/login_png.png'
+import { useNavigate } from 'react-router-dom';
+
 
 const LoginPage = () => {
+
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('Customer'); // Default role
@@ -83,7 +87,13 @@ const LoginPage = () => {
             </button>
             <p className="mt-3 text-center">
               Don’t have an account? 
-              <a href="#" className="text-primary" style={{ color: '#007bff' }}>Signup</a>  {/* Blue color for the signup link */}
+              <button
+                onClick={() => navigate('/registration')}
+                className="btn btn-link text-primary p-0"
+                style={{ color: '#007bff' }}
+              >
+                Signup
+              </button>
             </p>
           </form>
         </div>
