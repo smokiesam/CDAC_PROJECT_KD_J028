@@ -94,7 +94,7 @@ const LoginPage = () => {
             src={login_png}  // Image path
             alt="Login Illustration"
             className="img-fluid rounded"
-            style={{ height: '100%', objectFit: 'cover' }}
+            style={{ height: '100%', objectFit: 'cover',transform: 'translateY(38px)'  }}
           />
         </div>
       </div>
