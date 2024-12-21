@@ -12,7 +12,7 @@ const App = () => {
     <Router>
       <Header /> 
       <div className="container-fluid d-flex justify-content-center align-items-center vh-100 p-0" style={{
-    backgroundColor: '#FFDAB9', maxWidth: '1550px', margin: '0 auto' }}> {/* Added container here */}
+    backgroundColor: '#FEF4EA', maxWidth: '1550px', margin: '0 auto' }}> {/* Added container here */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
