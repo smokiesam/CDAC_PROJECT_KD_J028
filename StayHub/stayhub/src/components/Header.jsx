@@ -1,7 +1,9 @@
 import React from 'react';
 import logo from '../images/logo.png';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -42,7 +44,7 @@ const Header = () => {
                 <button
                   className="nav-link dropdown-toggle text-white"
                   id="navbarDropdown"
-                  role="button"
+                  //role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
@@ -75,7 +77,7 @@ const Header = () => {
                 <button
                   className="btn text-white px-4"
                   style={{ backgroundColor: '#FF7700' }}
-                  onClick={() => console.log('Login clicked')}
+                  onClick={() => navigate('/login')}
                 >
                   Login
                 </button>
