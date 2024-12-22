@@ -1,3 +1,4 @@
+/* Reset Styles */
 * {
   margin: 0;
   padding: 0;
@@ -5,30 +6,40 @@
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #fef4ea;
+  /* Removed margin: 0 as it's already set in the reset */
 }
 
-img {
-  max-width: 100%;
-  height: auto; /* Ensures images scale correctly */
+/* Container Styles */
+.container {
+  max-width: 1550px; /* Ensures container width doesn't exceed 1550px */
+  margin: 0 auto; /* Centers content */
+  padding: 0; /* Removed unnecessary padding */
 }
 
-.container-fluid {
-  padding: 0; /* Remove any extra padding */
+/* Responsive Utilities */
+.text-center {
+  text-align: center;
 }
 
+.text-md-start {
+  text-align: start;
+}
+
+/* Sticky Footer Layout */
+footer {
+  margin-top: auto; /* Ensure footer sticks to the bottom */
+}
+
+/* App Container for Sticky Footer (this can be removed if you're already using .container in App.js) */
 .app-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Pushes footer to the bottom */
   min-height: 100vh;
 }
 
-footer {
-  margin-top: auto; /* Push footer to the bottom */
+.content {
+  flex: 1; /* Ensures content grows dynamically */
 }

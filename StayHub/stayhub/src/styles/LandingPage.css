@@ -1,0 +1,44 @@
+/* Existing styles for sections */
+.hero-section {
+    background-color: #fef4ea;
+    padding: 50px 0;
+  }
+  
+  .features-section {
+    background-color: #ffffff;
+    padding: 50px 0;
+  }
+  
+  .about-section {
+    background-color: #f7f7f7;
+    padding: 50px 0;
+  }
+  
+  /* Styles for headings */
+  h1, h2 {
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Constrain the main content width */
+  .landing-page-content {
+    max-width: 1550px; /* Already set in the container in App.js */
+    margin: 0 auto; /* Center horizontally */
+    padding: 0; /* No need to add padding, handled globally */
+  }
+  
+  /* Ensure responsive images shrink proportionally */
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
