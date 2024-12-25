@@ -2,13 +2,28 @@ import React from 'react';
 import '../styles/LandingPage.css';
 import { useNavigate } from 'react-router-dom';
 import landing_bg from '../images/landing_bg.png';
-// import 'owl.carousel/dist/assets/owl.carousel.css';
-// import 'owl.carousel/dist/assets/owl.theme.default.css';
-// import OwlCarousel from 'react-owl-carousel';
+import Carousel from '../components/Carousel.jsx';  //swiper carousel
+// swiper carousel images
+import review1 from '../images/review1.svg';  
+import review2 from '../images/review2.svg';
+import review3 from '../images/review3.svg';
+import review4 from '../images/review4.svg';
+import review5 from '../images/review5.svg';
+import review6 from '../images/review6.svg';
+
 
 
 const LandingPage = () => {
 const navigate = useNavigate();
+const slides = [
+  { image: review1, title: '', description: '' },
+  { image: review2, title: '', description: '' },
+  { image: review3, title: '', description: '' },
+  { image: review4, title: '', description: '' },
+  { image: review5, title: '', description: '' },
+  { image: review6, title: '', description: '' }
+];
+
 
   return (
     <div className="landing-page">
@@ -267,10 +282,10 @@ const navigate = useNavigate();
   </section>
 
     {/* Last SubHeading */}
-        <div className="d-flex align-items-center justify-content-center mb-5 py-5">
+        <div className="d-flex align-items-center justify-content-center mb-3 py-3">
           <div>
             <div className="container text-center">
-              <p className="display-4">Stories That Inspire</p>
+              <p className="display-5 ">Stories That Inspire</p>
               <p className="lead">Real experiences, genuine reviews, and ratings from our happy guests.</p>
             </div>
           </div>
@@ -278,38 +293,14 @@ const navigate = useNavigate();
 
 
 
-      {/* Reviews Owl Carousel */}
-        {/* <div className="container my-5">
-      <h2 className="text-center mb-4">Our Features</h2>
-
-        <OwlCarousel
-          className="owl-theme"
-          loop
-          margin={10}
-          nav={false}
-          autoplay
-          autoplayTimeout={3000}
-          autoplayHoverPause
-          items={3} // Number of visible items
-        >
-          <div className="item">
-            <img src="/images/feature1.jpg" alt="Feature 1" />
-            <h4 className="text-center mt-2">Feature 1</h4>
-          </div>
-          <div className="item">
-            <img src="/images/feature2.jpg" alt="Feature 2" />
-            <h4 className="text-center mt-2">Feature 2</h4>
-          </div>
-          <div className="item">
-            <img src="/images/feature3.jpg" alt="Feature 3" />
-            <h4 className="text-center mt-2">Feature 3</h4>
-          </div>
-          <div className="item">
-            <img src="/images/feature4.jpg" alt="Feature 4" />
-            <h4 className="text-center mt-2">Feature 4</h4>
-          </div>
-        </OwlCarousel>
-      </div> */}
+      {/* Reviews Carousel */}
+      <div className="container-fluid pb-4 bg-dark">
+        <Carousel
+          slides={slides}
+          slidesPerView={3}
+          spaceBetween={20}
+        />
+      </div>
 
       </div>
     </div>
