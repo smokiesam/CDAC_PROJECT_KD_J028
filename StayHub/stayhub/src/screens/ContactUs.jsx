@@ -96,7 +96,7 @@ const ContactUs = () => {
                 </div>
 
                 {/* Submit Button */}
-                <button type="submit" className="btn btn-primary w-100">
+                <button type="submit" className="btn w-100" style={{backgroundColor:"#FF7700"}}>
                     Submit
                 </button>
                 </form>
@@ -119,11 +119,46 @@ const ContactUs = () => {
     </div>
   </section>
   
-  
+          {/* Button Section */}
+          <section className="features-section" style={{ backgroundColor: "#FFFFFF"}}>
+            <div className="container-fluid px-0 text-center">
+                <button
+                className="btn mx-5"
+                style={{
+                    backgroundColor: "#FF7700",
+                    color: "#FFF",
+                    fontWeight: "bold",
+                    padding: "30px 60px",
+                    fontSize: "16px",
+                    borderRadius: "5px",
+                    fontFamily: "Arial, sans-serif", // Gap between buttons
+                }}
+                >
+                Button 1
+                </button>
+                <button
+                className="btn mx-5"
+                style={{
+                    backgroundColor: "#FF7700",
+                    color: "#FFF",
+                    fontWeight: "bold",
+                    padding: "30px 60px",
+                    fontSize: "16px",
+                    borderRadius: "5px",
+                    fontFamily: "Arial, sans-serif",
+                }}
+                >
+                Button 2
+                </button>
+            </div>
+            </section>
+
+
+
           {/* Features Section */}
           <section className="features-section white-bg py-0">
             <div className="container-fluid px-0">
-              <h2 className="text-center mb-5 text-white display-6 fw-normal py-5" style={{backgroundColor:"#FF7700"}}><span className='text-black fw-semibold'>Our <span style={{color:"white"}}>Minds</span> Behind</span></h2>
+              <h2 className="text-center mb-5 text-white display-6 fw-normal py-5" style={{backgroundColor:"#FF7700"}}><span className='text-black fs-1'>Connect With One Of Our Offices!</span></h2>
             </div>
           </section>
   
@@ -140,106 +175,27 @@ const ContactUs = () => {
     }}
   >
     <div className="container px-0 pt-5">
-       {/* Character-1 Block: Text Left, Image Right */}
-       <div className="row align-items-center mb-5 py-5">
-        <div className="col-md-6 d-flex flex-column align-items-center text-black">
-          <h4 className="fs-2">
-            Sanyam Saxena
-          </h4>
-          <h5 className="fs-4 py-2">
-            Team-Lead & Frontend Designer
-          </h5>
-          <p className="fs-5">
-            Sanyam creates intuitive and visually appealing user interfaces 
-            as well as oversees project timelines and ensures seamless 
-            coordination among the team.
-          </p>
-        </div>
-        <div className="col-md-6 d-flex justify-content-center">
-          <img
-            src={require('../images/character-1.png')}
-            alt="character-img"
-            className="img-fluid rounded"
-            style={{ width: '65%', height: 'auto' }}
-          />
-        </div>
-      </div>
   
       {/* Character 2: Image Left, Text Right */}
       <div className="row align-items-center mb-5 py-5">
         <div className="col-md-6 d-flex justify-content-center">
         <img
-            src={require('../images/character-3.png')}
+            src={require('../images/contactusmap.png')}
             alt="character-img"
             className="img-fluid rounded"
             style={{ width: '65%', height: 'auto' }}
           />
         </div>
         <div className="col-md-6 d-flex flex-column align-items-center text-black">
-        <h4 className="fs-2">
-            Nishant Deshmukh
-          </h4>
           <h5 className="fs-4 py-2">
-            UI/UX Designer
+            Office1
           </h5>
           <p className="fs-5">
-            Nishant is a talented UI/UX designer with a keen eye for detail
-            and user-centric design. He excels in creating intuitive,
-            visually appealing interfaces that enhance user experiences 
-            and engagement.
+            Some Office Description.
           </p>
         </div>
       </div>
-  
-      {/* Character-3 : Text Left, Image Right */}
-      <div className="row align-items-center mb-5 py-5">
-        <div className="col-md-6 d-flex flex-column align-items-center text-black">
-        <h4 className="fs-2">
-            Krishn Kant Chaubey
-          </h4>
-          <h5 className="fs-4 py-2">
-            Backend Developer
-          </h5>
-          <p className="fs-5">
-          Krishn specializes in developing robust server-side logic,
-           ensuring seamless communication between the frontend and backend. 
-          </p>
-        </div>
-        <div className="col-md-6 d-flex justify-content-center">
-        <img
-            src={require('../images/character-2.png')}
-            alt="character-img"
-            className="img-fluid rounded"
-            style={{ width: '70%', height: 'auto' }}
-          />
-        </div>
-      </div>
-  
-      {/* Character 4: Image Left, Text Right */}
-      <div className="row align-items-center mb-5 py-5">
-        <div className="col-md-6 d-flex justify-content-center">
-        <img
-            src={require('../images/character-4.png')}
-            alt="character-img"
-            className="img-fluid rounded"
-            style={{ width: '65%', height: 'auto' }}
-          />
-        </div>
-        <div className="col-md-6 d-flex flex-column align-items-center text-black">
-        <h4 className="fs-2">
-            Devarshi Pathak
-          </h4>
-          <h5 className="fs-4 py-2">
-          QA Specialist
-          </h5>
-          <p className="fs-5">
-            Devarshi is a detail-oriented QA specialist who ensures the
-            product is reliable and user-friendly. Through rigorous testing
-            and quality checks, he delivers a bug-free and smooth user 
-            experience.
-          </p>
-        </div>
-      </div>
+      
   
     </div>
   </section>
