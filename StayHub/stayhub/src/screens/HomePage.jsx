@@ -1,245 +1,260 @@
-import React from 'react';
+import React, { useState } from "react";
+import '../styles/HomePage.css'; 
+
+import pgImage from '../images/pglist.png';
+import pgImage2 from '../images/pglist2.png';
+import pgImage3 from '../images/pglist3.png';
+import crouselimage from '../images/pglistcrousel1.png';
+import crouselimage2 from '../images/pglistcrousel2.png';
+import crouselimage3 from '../images/pglistcrousel3.png';
+
+
+
 
 
 const HomePage = () => {
+  const [activeFilter, setActiveFilter] = useState('PG/Hostels');
+  
+  const carouselItems = [
+    {
+      id: 1,
+      image: crouselimage,
+      title: "Our rooms: Fully furnished",
+      subtitle: "Your comfort: Fully sorted",
+      description: "Fully furnished residences. Limited beds left. Book now."
+    },
+    {
+      id: 2,
+      image: crouselimage2,
+      title: "Premium Living Spaces",
+      subtitle: "Experience comfort like never before",
+      description: "Modern amenities with 24/7 support."
+    },
+    {
+      id: 3,
+      image: crouselimage3,
+      title: "Student Special Offers",
+      subtitle: "Affordable and Comfortable",
+      description: "Special rates for students. Book now!"
+    }
+  ];
+  // Property data
+  const propertyData = [
+    {
+      id: 1,
+      title: "Cairns House",
+      location: "Pune",
+      price: "₹ 500.00/mon*",
+      image: pgImage,
+      features: ["Attached Washroom", "Spacious Cupboard"],
+    },
+    {
+      id: 2,
+      title: "Cairns House",
+      location: "Lucknow",
+      price: "₹ 500.00/mon*",
+      features: ["AC", "High Speed Wifi"],
+      image: pgImage2,
+    },
+    {
+      id: 3,
+      title: "Cairns House",
+      location: "Mumbai",
+      price: "₹ 500.00/mon*",
+      features: ["Washing Machine", "Spacious Refrigerator"],
+      image: pgImage3,
+    },
+    {
+      id: 4,
+      title: "Cairns House",
+      location: "Pune",
+      price: "₹ 500.00/mon*",
+      features: ["Hot Water Supply", "Flat Screen TV"],
+      image: pgImage,
+    }
+  ];
+
+  // FAQ data
+  const faqData = [
+    {
+      question: "How Good is the Quality of Food, Laundry, and Room Cleaning Services of PGs in Ahmedabad?",
+      answer: "No doubt, you'll find more than one pg with food in Ahmedabad that also offers laundry and room cleaning services. But compared to the curated meals, and the professionally trained laundry and housekeeping facilities that we provide, we doubt if they can be considered good enough."
+    },
+    {
+      question: "Which is the Best Boys PG in Ahmedabad?",
+      answer: "It's not hard to find a pg in Ahmedabad for boys. But the absolute pg is the one that doesn't make you feel like you're staying in pg rooms. We're talking about, of course, Stanza Living."
+    },
+    {
+      question: "How Safe are Ladies Hostels Near me?",
+      answer: "We can't speak about the safety of other Girls and Ladies hostels near you, but at every Stanza Living residence, we have a robust, tech-enabled security system that includes biometric entry and CCTV cameras. For us, anything less than that is not safe enough."
+    }
+  ];
+
   return (
-    <div className="container my-4 py-3">
-      {/* Image and Reserve Form */}
-      <div className="row">
-        <div className="col-md-8">
-          <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
-            <div className="carousel-inner">
-              {/* Carousel Item 1 */}
-              <div className="carousel-item active">
-                <div className="mb-3">
-                  <img
-                    src={require('../images/detailspagecrousel1.png')} // Replace with the actual image URL
-                    alt="PG in Kondhwa with Kitchen"
-                    className="img-fluid rounded"
-                  />
-                </div>
-              </div>
-              <div className="carousel-item active">
-                <div className="mb-3">
-                  <img
-                    src={require('../images/detailspagecrousel2.png')} // Replace with the actual image URL
-                    alt="PG in Kondhwa with Kitchen"
-                    className="img-fluid rounded"
-                  />
-                </div>
-              </div>
-              <div className="carousel-item active">
-                <div className="mb-3">
-                  <img
-                    src={require('../images/detailspagecrousel3.png')} // Replace with the actual image URL
-                    alt="PG in Kondhwa with Kitchen"
-                    className="img-fluid rounded"
-                  />
-                </div>
-              </div>
-              <div className="carousel-item active">
-                <div className="mb-3">
-                  <img
-                    src={require('../images/detailspagecrousel4.png')} // Replace with the actual image URL
-                    alt="PG in Kondhwa with Kitchen"
-                    className="img-fluid rounded"
-                  />
-                </div>
-              </div>
-              <div className="carousel-item active">
-                <div className="mb-3">
-                  <img
-                    src={require('../images/detailspagecrousel5.png')} // Replace with the actual image URL
-                    alt="PG in Kondhwa with Kitchen"
-                    className="img-fluid rounded"
-                  />
-                </div>
-              </div>
+    <div className="container-fluid p-0 ">
+          <div id="mainCarousel" className="carousel slide" data-bs-ride="carousel">
+      {/* Carousel Indicators */}
+      <div className="carousel-indicators">
+        {carouselItems.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to={index}
+            className={index === 0 ? 'active' : ''}
+            aria-label={`Slide ${index + 1}`}
+          ></button>
+        ))}
+      </div>
 
-              {/* Additional carousel items can be added similarly */}
-            </div>
+      {/* Carousel Items */}
+      <div className="carousel-inner">
+        {carouselItems.map((item, index) => (
+          <div key={item.id} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+            
+            <img
+              src={item.image}
+              className="d-block w-100"
+              alt={item.title}
+              style={{ height: '300px', objectFit: 'cover' }}
+            />
+          </div>
+        ))}
+      </div>
 
-            {/* Carousel Controls */}
-            <a className="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Previous</span>
-            </a>
-            <a className="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Next</span>
-            </a>
+      {/* Carousel Controls */}
+      <button className="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+      </button>
+      <button className="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+      </button>
+    </div>
+      {/* Filters Section */}
+      <div className="container mb-4 py-4">
+        <div className="d-flex flex-wrap gap-3 justify-content-start align-items-center">
+          <div className="d-flex gap-2 flex-nowrap">
+            {['PG/Hostels', 'Flats', 'Locality', 'Budget', 'BHK', 'Amenities'].map((filter) => (
+              <button
+                key={filter}
+                className={`btn ${activeFilter === filter ? 'btn-primary' : 'btn-outline-secondary'} rounded-pill`}
+                onClick={() => setActiveFilter(filter)}
+              >
+                {filter}
+              </button>
+            ))}
           </div>
 
-          <h2>₹7,399/mo*</h2>
-
-          {/* Tabs */}
-          <ul className="nav nav-tabs my-3">
-            <li className="nav-item">
-              <a className="nav-link active" data-bs-toggle="tab" href="#amenities">
-                Amenities
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" data-bs-toggle="tab" href="#services">
-                Services
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" data-bs-toggle="tab" href="#details">
-                Details
-              </a>
-            </li>
-          </ul>
-
-          <div className="tab-content">
-            {/* Amenities Tab */}
-            <div className="tab-pane fade show active" id="amenities">
-              <div className="mt-3">
-                <h4>Amenities</h4>
-                <div className="d-flex flex-wrap">
-                  <div className="border rounded-pill px-3 py-2 me-2 mb-2">
-                    <i className="bi bi-box"></i> Spacious Cupboard
-                  </div>
-                  <div className="border rounded-pill px-3 py-2 me-2 mb-2">
-                    <i className="bi bi-water"></i> Attached Washroom
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Services Tab */}
-            <div className="tab-pane fade" id="services">
-              <div className="mt-3">
-                <h4>Services</h4>
-                <div className="d-flex flex-wrap">
-                  <div className="border rounded-pill px-3 py-2 me-2 mb-2">
-                    <i className="bi bi-snow"></i> AC
-                  </div>
-                  <div className="border rounded-pill px-3 py-2 me-2 mb-2">
-                    <i className="bi bi-wifi"></i> High-Speed WiFi
-                  </div>
-                  <div className="border rounded-pill px-3 py-2 me-2 mb-2">
-                    <i className="bi bi-washing-machine"></i> Washing Machine
-                  </div>
-                  <div className="border rounded-pill px-3 py-2 me-2 mb-2">
-                    <i className="bi bi-refrigerator"></i> Spacious Refrigerator
-                  </div>
-                  <div className="border rounded-pill px-3 py-2 me-2 mb-2">
-                    <i className="bi bi-droplet"></i> Hot Water Supply
-                  </div>
-                  <div className="border rounded-pill px-3 py-2 me-2 mb-2">
-                    <i className="bi bi-tv"></i> Flat-Screen TV
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Details Section */}
-            <div id="details-section" className="mt-3">
-              <h4>Details of Shiraz House</h4>
-              <p id="details-content">
-                It's not your typical PG. Shiraz House by Stanza Living is your second home.
-                <span id="read-more-content" style={{ display: "none" }}>
-                  <br /><br />
-                  Because, just like back at home, this fully-furnished residence for boys, like all our , , and , has all the comforts you're used to. Housekeeping (so your room's always neat and clean), high-speed wifi (so your streaming is uninterrupted), curated meals (so you never miss home-cooked food), and many more such thoughtfully-selected amenities for students like you.
-                  <br /><br />
-                  With a dose of technology, we also prescribe old-school human connection. Our regularly held movie screenings, game nights, and other events and workshops offer opportunities to make lifetime memories with your co-residents and your Stanza Living family. Our city-wide events will also bring you closer to Stanzens from all over town, be it near or . Trust us, no normal PG Hostel can offer this feeling of family.
-                  <br /><br />
-                  Speaking of family, we're implementing every safety measure in the book - from regular sanitization to thermal monitoring - to protect you from COVID-19. Because that's what a family does.
-                  <br /><br />
-                  So this feeling of family, together with the comforts and technology, puts Shiraz House in top position compared to the local boys. But don't go by our word alone. Visit your second house and see what makes it a winner.
-                </span>
-              </p>
-              <button
-                id="toggle-details-btn"
-                className="btn btn-link"
-                onClick={() => {
-                  const moreContent = document.getElementById("read-more-content");
-                  const btn = document.getElementById("toggle-details-btn");
-                  if (moreContent.style.display === "none") {
-                    moreContent.style.display = "inline";
-                    btn.textContent = "Read Less";
-                  } else {
-                    moreContent.style.display = "none";
-                    btn.textContent = "Read More";
-                  }
-                }}
-              >
-                Read More
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Reserve Form */}
-        <div className="col-md-4" style={{ position: "sticky", top: "0" }}>
-          <div className="border p-4 bg-light rounded">
-            <h3 className="text-center">Reserve Now</h3>
-            <form>
-              <div className="mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  placeholder="Name"
-                />
-              </div>
-              <div className="mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="phone"
-                  placeholder="Phone number"
-                />
-              </div>
-              <div className="mb-3">
-                <select id="occupancy" className="form-select">
-                  <option value="">Occupancy</option>
-                  <option value="single">Single</option>
-                  <option value="double">Double</option>
-                </select>
-              </div>
-              <div className="form-check mb-3">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="terms"
-                />
-                <label className="form-check-label" htmlFor="terms">
-                  I have read and agreed to the{" "}
-                  <a href="/terms-and-conditions" className="text-primary">
-                    terms & conditions
-                  </a>{" "}
-                  of Reserve Now and hereby confirm proceed.
-                </label>
-              </div>
-              <button
-                type="submit"
-                className="btn w-100 text-white fw-bold"
-                style={{ backgroundColor: "#FF7700", border: "none" }}
-              >
-                Reserve Now/ Pay now!
-              </button>
-            </form>
+          <div className="dropdown">
+            <button
+              className="btn btn-outline-secondary dropdown-toggle rounded-pill"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Sort By: Distance
+            </button>
+            <ul className="dropdown-menu">
+              <li><button className="dropdown-item">Nearest</button></li>
+              <li><button className="dropdown-item">Farthest</button></li>
+              <li><button className="dropdown-item">Shortest Time</button></li>
+            </ul>
           </div>
         </div>
       </div>
 
-      {/* Food Menu */}
-      <div className="mt-5">
-        <h4>Food Menu</h4>
-        <div>
-          <img
-            src={require('../images/Foodmenuimg1.png')} // Replace with the correct path to your image
-            alt="Food Menu"
-            className="img-fluid rounded"
-          />
+      {/* Main Content Section */}
+      <div className="container">
+  <div className="row">
+    {/* Property Listings */}
+    <div className="col-lg-7">
+      {propertyData.map((property) => (
+        <div key={property.id} className="card mb-4 border shadow-sm">
+          <div className="row g-0">
+            <div className="col-md-4">
+              <img
+                src={property.image}
+                className="img-fluid h-100 object-fit-cover"
+                alt={property.title}
+              />
+            </div>
+            <div className="col-md-8">
+              <div className="card-body">
+                <h5 className="card-title">{property.title}</h5>
+                <p className="text-muted">{property.location}</p>
+                <div className="mb-3">
+                  <p className="mb-2 fw-bold">Features:</p>
+                  <div className="d-flex flex-wrap gap-2">
+                    {property.features.map((feature, index) => (
+                      <span key={index} className="badge bg-light text-dark">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-primary fw-bold">Starts from {property.price}</p>
+                <div className="d-flex gap-2">
+                  <button className="btn btn-primary">DETAILS</button>
+                  <button className="btn btn-outline-primary">BOOK NOW</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div><p>*This food menu is currently being served on the residence and is subject to change in future.</p></div>
+      ))}
+    </div>
+
+    {/* Map Section */}
+    <div className="col-lg-5">
+      <div className="sticky-top" style={{ top: '1rem' }}>
+        <div className="map-container rounded shadow-sm" style={{ height: '600px' }}>
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=72.4,23.0,72.6,23.2&layer=mapnik"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen={true}
+            loading="lazy"
+            title="Location Map"
+          ></iframe>
+        </div>
       </div>
+    </div>
+  </div>
+
+  {/* FAQ Section */}
+  <div className="mt-5 mb-5">
+    <h3 className="mb-4">FAQs on PG in Ahmedabad</h3>
+    <div className="accordion" id="faqAccordion">
+      {faqData.map((faq, index) => (
+        <div className="accordion-item" key={index}>
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target={`#faq${index}`}
+            >
+              {faq.question}
+            </button>
+          </h2>
+          <div
+            id={`faq${index}`}
+            className="accordion-collapse collapse"
+            data-bs-parent="#faqAccordion"
+          >
+            <div className="accordion-body">{faq.answer}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
     </div>
   );
 };
 
 export default HomePage;
-
