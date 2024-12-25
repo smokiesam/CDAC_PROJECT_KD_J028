@@ -7,6 +7,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import RegistrationPage from './screens/RegistrationPage';
 import HomePage from './screens/HomePage';
+import AboutUs from './screens/AboutUs';
+import ContactUs from './screens/ContactUs';
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/homepage" element={<HomePage />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/contactus" element={<ContactUs />} />
         </Routes>
       </div>
       <Footer />
