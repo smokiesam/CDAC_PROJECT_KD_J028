@@ -34,7 +34,12 @@ const Header = () => {
             <ul className="navbar-nav ms-auto">
               {/* About Link */}
               <li className="nav-item">
-                <a className="nav-link text-white" href="/about">
+              <a
+                className="nav-link text-white"
+                href="/aboutus"
+                onClick={() => {
+                  navigate('/aboutus'); // Navigate to the desired route
+              }}>
                   About
                 </a>
               </li>
@@ -52,8 +57,12 @@ const Header = () => {
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a className="dropdown-item" href="/action1">
-                      Action
+                    <a 
+                    className="dropdown-item" 
+                    href="/contactus"
+                    onClick={() => {navigate('/contactus'); // Navigate to the desired route
+                    }}>
+                      Contact Us
                     </a>
                   </li>
                   <li>
