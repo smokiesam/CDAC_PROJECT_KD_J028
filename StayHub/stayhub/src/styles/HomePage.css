@@ -1,0 +1,79 @@
+/* Keep the custom styles as they are */
+.btn-primary {
+    color: #FF7700;
+  border-color: #FF7700;
+}
+
+.btn-outline-primary {
+  border-color: #FF7700;
+  color: #FF7700;
+}
+
+.btn-outline-primary:hover {
+  background-color: #FF7700;
+  border-color: #FF7700;
+  color: white;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.badge {
+  padding: 0.5rem 1rem;
+  font-weight: normal;
+}
+
+.map-container {
+  position: sticky;
+  top: 1rem;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #FF7700;
+  color: white;
+}
+
+.accordion-button:focus {
+  border-color: #FF7700;
+  box-shadow: 0 0 0 0.25rem rgba(255, 119, 0, 0.25);
+}
+
+/* Prevent wrapping of the filter buttons */
+.d-flex.flex-nowrap {
+  flex-wrap: nowrap;
+  overflow-x: auto; /* Allow horizontal scroll if buttons don't fit */
+}
+.carousel-item img {
+  height: 200px;
+  object-fit: cover;
+}
+.carousel-image-container {
+  height: 100px; /* Adjust this value to make images smaller or larger */
+  overflow: hidden;
+}
+
+.carousel-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.carousel-indicators {
+  margin-bottom: 0.5rem;
+}
+
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 4px;
+}
