@@ -1,7 +1,10 @@
 import React from 'react';
 import '../styles/LandingPage.css';
 import { useNavigate } from 'react-router-dom';
-import homepage_bg from '../images/homepage_bg.png';
+import landing_bg from '../images/landing_bg.png';
+// import 'owl.carousel/dist/assets/owl.carousel.css';
+// import 'owl.carousel/dist/assets/owl.theme.default.css';
+// import OwlCarousel from 'react-owl-carousel';
 
 
 const LandingPage = () => {
@@ -47,8 +50,9 @@ const navigate = useNavigate();
                 style={{ height: '100%', objectFit: 'cover' }} // Ensure image fills the container
               />
               <div className="carousel-caption d-none d-md-block">
-                <h5>Comfortable Living</h5>
-                <p>Find PGs that suit your lifestyle and needs.</p>
+                <p className='fw-bold fs-5'>
+                  Come, live the new kind of Living.    
+                </p>
               </div>
             </div>
             {/* Carousel Item 2 */}
@@ -150,7 +154,7 @@ const navigate = useNavigate();
         <section
   className="about-section py-5 align-items"
   style={{
-    backgroundImage: `url(${homepage_bg})`,
+    backgroundImage: `url(${landing_bg})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center top',
     backgroundColor: '#fff',
@@ -160,14 +164,15 @@ const navigate = useNavigate();
   }}
 >
   <div className="container pt-5">
-    <h2 className="text-center mb-5 text-white">Why Choose StayHub?</h2>
-    {/* Block 1: Text Left, Image Right */}
-    <div className="row align-items-center mb-5">
-      <div className="col-md-6 text-white">
-        <h4>Wide Range of PGs</h4>
-        <p>Explore options tailored to your budget and preferences.</p>
+    <h2 className="text-center mb-5 text-white display-6 fw-normal">Why Choose <span className='text-black fw-semibold'>StayHub?</span></h2>
+
+     {/* Block 1: Text Left, Image Right */}
+     <div className="row align-items-center mb-5 py-5">
+      <div className="col-md-6 d-flex flex-column align-items-center text-white">
+        <h4 className="fs-3">Wide Range of PGs</h4>
+        <p className="fs-5">Explore options tailored to your budget and preferences.</p>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-6 d-flex justify-content-center">
         <img
           src="https://via.placeholder.com/400x300"
           alt="Wide Range of PGs"
@@ -176,140 +181,135 @@ const navigate = useNavigate();
       </div>
     </div>
 
-    {/* Block 2: Image Left, Text Right */}
-    <div className="row align-items-center mb-5">
-      <div className="col-md-6">
+    {/* Block 1: Image Left, Text Right */}
+    <div className="row align-items-center mb-5 py-5">
+      <div className="col-md-6 d-flex justify-content-center">
         <img
           src="https://via.placeholder.com/400x300"
           alt="Affordable PGs"
           className="img-fluid rounded"
         />
       </div>
-      <div className="col-md-6 text-white">
-        <h4>Affordable Pricing</h4>
-        <p>Stay in comfortable and affordable accommodations.</p>
+      <div className="col-md-6 d-flex flex-column align-items-center text-white">
+        <h4 className="fs-3">Affordable Pricing</h4>
+        <p className="fs-5">Stay in comfortable and affordable accommodations.</p>
       </div>
     </div>
 
-    {/* Block 3: Text Left, Image Right */}
-    <div className="row align-items-center mb-5">
-      <div className="col-md-6 text-white">
-        <h4>Convenient Locations</h4>
-        <p>PGs located in prime areas near schools, offices, and amenities.</p>
+    {/* Block 1: Text Left, Image Right */}
+    <div className="row align-items-center mb-5 py-5">
+      <div className="col-md-6 d-flex flex-column align-items-center text-white">
+        <h4 className="fs-3">Wide Range of PGs</h4>
+        <p className="fs-5">Explore options tailored to your budget and preferences.</p>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-6 d-flex justify-content-center">
         <img
           src="https://via.placeholder.com/400x300"
-          alt="Convenient Locations"
-          className="img-fluid rounded"
-        />
-    </div>
-
-    {/* Block 4: Image Left, Text Right */}
-    <div className="row align-items-center mb-5">
-      <div className="col-md-6">
-        <img
-          src="https://via.placeholder.com/400x300"
-          alt="Affordable PGs"
+          alt="Wide Range of PGs"
           className="img-fluid rounded"
         />
       </div>
-      <div className="col-md-6 text-white">
-        <h4>Affordable Pricing</h4>
-        <p>Stay in comfortable and affordable accommodations.</p>
-      </div>
-    </div>
-
-      {/* Block 5: Text Left, Image Right */}
-      <div className="row align-items-center mb-5">
-        <div className="col-md-6 text-white">
-          <h4>Wide Range of PGs</h4>
-          <p>Explore options tailored to your budget and preferences.</p>
-        </div>
-        <div className="col-md-6">
-          <img
-            src="https://via.placeholder.com/400x300"
-            alt="Wide Range of PGs"
-            className="img-fluid rounded"
-          />
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
 
-{/* Additional Section */}
-<section className="features-section white-bg py-5">
-          <div className="container">
-            <h2 className="text-center mb-5">Our Features</h2>
-            <div className="row text-center">
-              <div className="col-md-4">
-                <h5>Easy Booking</h5>
-                <p>Find and book PGs with just a few clicks.</p>
-              </div>
-              <div className="col-md-4">
-                <h5>Verified Listings</h5>
-                <p>Stay with trusted and verified PG providers.</p>
-              </div>
-              <div className="col-md-4">
-                <h5>24/7 Support</h5>
-                <p>We’re here to help anytime you need.</p>
-              </div>
+
+  {/* Download Section */}
+  <section className="download-section pb-5" style={{marginTop:'120px'}}>
+    <div className="container">
+      <div className="row align-items-center mb-5 py-5">
+        {/* Left Column - Buttons */}
+        <div className="col-md-6 d-flex flex-column align-items-center text-black">
+          <h2 className="mb-4 d-flex flex-column align-items-center">
+            Always have us at your fingertips</h2>
+          <p className="mb-4">
+            Download our mobile app and access the best PGs right at your fingertips!
+          </p>
+        {/* Sub Columns */}
+        <div className="row align-items-center mb-5 py-4">
+          <div className="col-md-6 d-flex flex-column align-items-center text-white">
+            {/* Play Store Button */}
+            <a
+              href="/"
+              className="btn btn-primary btn-lg d-flex align-items-center fa-brands"
+              style={{ backgroundColor: '#FF7700', border: 'none', padding: '10px 15px' }}
+            >
+              Download 
+              <i class="fa-brands fa-google-play ms-2"></i>
+            </a>
+
+          </div>
+          <div className="col-md-6 d-flex justify-content-center">
+                {/* App Store Button */}
+                <a
+                  href="/"
+                  className="btn btn-secondary btn-lg d-flex align-items-center fa-brands"
+                  style={{ backgroundColor: '#333', border: 'none', padding: '10px 15px' }}
+                >
+                  Download
+                  <i class="fa-brands fa-apple ms-2"></i>
+                </a>
+          </div>
+        </div>
+        </div>
+
+        {/* Right Column - Phone Image */}
+        <div className="col-md-6 text-center">
+          <img
+            src={require('../images/landing_phone.png')}
+            alt="StayHub App on Phone"
+            className="img-fluid"
+            style={{ maxWidth: '350px' }}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+    {/* Last SubHeading */}
+        <div className="d-flex align-items-center justify-content-center mb-5 py-5">
+          <div>
+            <div className="container text-center">
+              <p className="display-4">Stories That Inspire</p>
+              <p className="lead">Real experiences, genuine reviews, and ratings from our happy guests.</p>
             </div>
           </div>
-        </section>
+        </div>
 
 
-{/* Download Section */}
-  <section className="download-section py-5" style={{height:'50vh'}}>
-  <div className="container">
-    <div className="row align-items-center">
-      {/* Left Column - Buttons */}
-      <div className="col-md-6 text-center text-md-start">
-        <h2 className="mb-4">Get the StayHub App</h2>
-        <p className="mb-4">
-          Download our mobile app and access the best PGs right at your fingertips!
-        </p>
 
-        {/* Play Store Button */}
-        <a
-          href="/"
-          className="btn btn-primary d-flex align-items-center mb-3 fa-brands"
-          style={{ backgroundColor: '#FF7700', border: 'none', padding: '10px 15px' }}
+      {/* Reviews Owl Carousel */}
+        {/* <div className="container my-5">
+      <h2 className="text-center mb-4">Our Features</h2>
+
+        <OwlCarousel
+          className="owl-theme"
+          loop
+          margin={10}
+          nav={false}
+          autoplay
+          autoplayTimeout={3000}
+          autoplayHoverPause
+          items={3} // Number of visible items
         >
-          Download
-          <i class="fa-brands fa-google-play"></i>
-        </a>
-
-        {/* App Store Button */}
-        <a
-          href="/"
-          className="fa-brands fa-apple btn btn-secondary d-flex align-items-center"
-          style={{ backgroundColor: '#333', border: 'none', padding: '10px 15px' }}
-        >
-          <img
-            src="/images/appstore-logo.png"
-            alt="App Store"
-            style={{ height: '25px', marginRight: '10px' }}
-          />
-          Download
-        </a>
-      </div>
-
-      {/* Right Column - Phone Image */}
-      <div className="col-md-6 text-center">
-        <img
-          src="/images/android-phone.png"
-          alt="StayHub App on Phone"
-          className="img-fluid"
-          style={{ maxWidth: '350px' }}
-        />
-      </div>
-    </div>
-  </div>
-</section>
-
+          <div className="item">
+            <img src="/images/feature1.jpg" alt="Feature 1" />
+            <h4 className="text-center mt-2">Feature 1</h4>
+          </div>
+          <div className="item">
+            <img src="/images/feature2.jpg" alt="Feature 2" />
+            <h4 className="text-center mt-2">Feature 2</h4>
+          </div>
+          <div className="item">
+            <img src="/images/feature3.jpg" alt="Feature 3" />
+            <h4 className="text-center mt-2">Feature 3</h4>
+          </div>
+          <div className="item">
+            <img src="/images/feature4.jpg" alt="Feature 4" />
+            <h4 className="text-center mt-2">Feature 4</h4>
+          </div>
+        </OwlCarousel>
+      </div> */}
 
       </div>
     </div>
