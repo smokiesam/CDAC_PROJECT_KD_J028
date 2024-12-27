@@ -64,7 +64,7 @@ const slides = [
                 alt="1"
                 style={{ height: '100%', objectFit: 'cover' }} // Ensure image fills the container
               />
-              <div className="carousel-caption d-none d-md-block">
+              <div className="carousel-caption d-none d-md-block" style={{ backgroundColor: 'transparent', color: 'white' }}>
                 <p className='fw-bold fs-5'>
                   Come, live the new kind of Living.    
                 </p>
@@ -78,7 +78,7 @@ const slides = [
                 alt="2"
                 style={{ height: '100%', objectFit: 'cover' }}
               />
-              <div className="carousel-caption d-none d-md-block">
+              <div className="carousel-caption d-none d-md-block" style={{ backgroundColor: 'transparent', color: 'white' }}>
               <p className='fw-bold fs-5'>
                 Where Every Stay Feels Like Home!    
                 </p>
@@ -92,7 +92,7 @@ const slides = [
                 alt="3"
                 style={{ height: '100%', objectFit: 'cover' }}
               />
-              <div className="carousel-caption d-none d-md-block">
+              <div className="carousel-caption d-none d-md-block" style={{ backgroundColor: 'transparent', color: 'white' }}>
                 <p className='fw-bold fs-5'>Affordable PGs that fit your budget.</p>
               </div>
             </div>
@@ -105,7 +105,7 @@ const slides = [
                 alt="4"
                 style={{ height: '100%', objectFit: 'cover' }}
               />
-              <div className="carousel-caption d-none d-md-block">
+              <div className="carousel-caption d-none d-md-block" style={{ backgroundColor: 'transparent', color: 'white' }}>
                 <p className='fw-bold fs-5'>
                 Spend less time
                 commuting and more hours unwinding.    
