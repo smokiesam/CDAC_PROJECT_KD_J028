@@ -13,9 +13,10 @@ import ContactUs from './screens/ContactUs';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
+  
   return (
     <Router>
-      <Header />
+      <Header/>
       <div className="container-fluid p-0" style={{ maxWidth: '1550px', minHeight: '100vh' }}>
         <Routes>
           {/* Public Routes */}
@@ -32,8 +33,8 @@ const App = () => {
             <Route path="/contactus" element={<ContactUs />} />
           </Route>
         </Routes>
-      </div>
-      <Footer />
+       </div>
+      <Footer/>
     </Router>
   );
 };
