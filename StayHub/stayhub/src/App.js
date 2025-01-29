@@ -11,9 +11,10 @@ import Details from './screens/Details';
 import OwnerPage from './screens/OwnerPage';
 
 const App = () => {
+  
   return (
     <Router>
-      <Header />
+      <Header/>
       <div className="container-fluid p-0" style={{ maxWidth: '1550px', minHeight: '100vh' }}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -23,8 +24,8 @@ const App = () => {
           <Route path="/details" element={<Details />} />
           <Route path="/ownerpage" element={<OwnerPage />} />
         </Routes>
-      </div>
-      <Footer />
+       </div>
+      <Footer/>
     </Router>
   );
 };

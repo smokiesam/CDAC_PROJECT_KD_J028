@@ -1,19 +1,43 @@
-/* Keep the custom styles as they are */
+/* Primary button: Orange background and white text */
 .btn-primary {
-    color: #FF7700;
-  border-color: #FF7700;
+  background-color: #FF7700 !important;
+  color: white !important;
+  border-color: #FF7700 !important;
 }
 
-.btn-outline-primary {
-  border-color: #FF7700;
-  color: #FF7700;
+/* Change background on hover */
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #e66a00 !important;
 }
 
-.btn-outline-primary:hover {
-  background-color: #FF7700;
-  border-color: #FF7700;
-  color: white;
+/* Outline button: Default border with orange text */
+.btn-outline-secondary {
+  color: #FF7700 !important;
+  border-color: #ced4da !important; /* Default Bootstrap border color */
 }
+
+/* Change to primary style when clicked */
+.btn-outline-secondary:active,
+.btn-outline-secondary.active {
+  background-color: #FF7700 !important;
+  color: white !important;
+  border-color: #FF7700 !important;
+}
+
+.dropdown-menu {
+  z-index: 1050 !important; /* Higher than the map */
+  position: absolute !important; /* Ensure it doesn't affect layout */
+  background-color: white; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+
+/* .btn-outline-secondary:hover {
+  background-color: #FF7700 !important;
+  color: white !important;
+} */
+
 
 .carousel-caption {
   background-color: rgba(0, 0, 0, 0.5);
@@ -76,4 +100,15 @@
   height: 10px;
   border-radius: 50%;
   margin: 0 4px;
+}
+
+/* Button Styling */
+.filter-btn {
+  background-color: #FF7700 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.filter-btn:hover {
+  background-color: #e66a00 !important; /* Slightly darker on hover */
 }
