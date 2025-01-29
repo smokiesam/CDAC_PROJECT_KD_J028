@@ -1,64 +1,104 @@
 import React from "react";
 
+import menuImage from '../images/menunew.svg';
+
 const Details = () => {
   return (
     <div className="container my-4">
       {/* Image and Reserve Form */}
       <div className="row">
         <div className="col-md-8">
-        <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
-  <div className="carousel-inner">
+        <div id="carouselExample"
+         className="carousel slide"
+          data-bs-ride="carousel"
+          data-bs-interval="1000"
+        >
+
+        <div className="carousel-inner" >
     {/* Carousel Item 1 */}
     <div className="carousel-item active">
-      <div className="mb-3">
+      <div className="mb-5">
         <img
           src={require("../images/detailspagecrousel2.png")}
           alt="PG in Kondhwa with Kitchen"
           className="img-fluid rounded carousel-img"
+          style={{height: '100%',
+            objectFit: 'cover',
+          }}
         />
       </div>
     </div>
-    <div className="carousel-item">
-      <div className="mb-3">
+    <div className="carousel-item active">
+      <div className="mb-5">
+        <img
+          src={require("../images/detailspagecrousel2.png")}
+          alt="PG in Kondhwa with Kitchen"
+          className="img-fluid rounded carousel-img"
+          style={{height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      </div>
+    </div>
+    <div className="carousel-item active">
+      <div className="mb-5">
         <img
           src={require("../images/detailspagecrousel3.png")}
           alt="PG in Kondhwa with Kitchen"
           className="img-fluid rounded carousel-img"
+          style={{height: '100%',
+            objectFit: 'cover',
+          }}
         />
       </div>
     </div>
-    <div className="carousel-item">
-      <div className="mb-3">
+    <div className="carousel-item active">
+      <div className="mb-5">
         <img
           src={require("../images/detailspagecrousel4.png")}
           alt="PG in Kondhwa with Kitchen"
           className="img-fluid rounded carousel-img"
+          style={{height: '100%',
+            objectFit: 'cover',
+          }}
         />
       </div>
     </div>
-    <div className="carousel-item">
-      <div className="mb-3">
+    <div className="carousel-item active">
+      <div className="mb-5">
         <img
           src={require("../images/detailspagecrousel5.png")}
           alt="PG in Kondhwa with Kitchen"
           className="img-fluid rounded carousel-img"
+          style={{height: '100%',
+            objectFit: 'cover',
+          }}
         />
       </div>
     </div>
+
   </div>
 
   {/* Carousel Controls */}
-  <a className="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+  <a className="carousel-control-prev"
+     href="#carouselExample"
+     role="button"
+     data-bs-slide="prev"
+   >
     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
     <span className="visually-hidden">Previous</span>
   </a>
-  <a className="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+  <a 
+  className="carousel-control-next" 
+  href="#carouselExample" 
+  role="button"
+  data-bs-slide="next">
     <span className="carousel-control-next-icon" aria-hidden="true"></span>
     <span className="visually-hidden">Next</span>
   </a>
 </div>
 
-
+          <h4>start from</h4>
           <h2>₹7,399/mo*</h2>
 
           {/* Tabs */}
@@ -227,7 +267,9 @@ const Details = () => {
         <h4>Food Menu</h4>
         <div>
           <img
-            src={require('../images/Foodmenuimg1.png')} // Replace with the correct path to your image
+            //src={require('../images/menunew.svg').default} 
+         
+            src={menuImage}
             alt="Food Menu"
             className="img-fluid rounded"
           />
