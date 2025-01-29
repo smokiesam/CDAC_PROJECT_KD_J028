@@ -43,3 +43,20 @@ footer {
 .content {
   flex: 1; /* Ensures content grows dynamically */
 }
+
+
+/* btn styling */
+.btn-primary {
+  background-color: #FF7700 !important; /* Custom orange color */
+  border-color: #FF7700 !important;
+}
+
+.btn-primary:hover {
+  background-color: #cc5c00 !important; /* Darker shade for hover */
+}
+
+.list-group-item.active {
+  background-color: #FF7700 !important; /* Custom theme color */
+  border-color: #FF7700 !important;
+  color: white !important;
+}

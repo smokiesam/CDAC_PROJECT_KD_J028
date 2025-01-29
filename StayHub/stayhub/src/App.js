@@ -7,10 +7,11 @@ import Footer from './components/Footer';
 import RegistrationPage from './screens/RegistrationPage';
 import HomePage from './screens/HomePage';
 import Details from './screens/Details';
-import OwnerPage from './screens/OwnerPage';
 import AboutUs from './screens/AboutUs';
 import ContactUs from './screens/ContactUs';
 import ProtectedRoute from './components/ProtectedRoute';
+import OwnerDashboard from './screens/OwnerDashboard';
+import UserDashboard from './screens/UserDashboard';
 
 const App = () => {
   return (
@@ -22,12 +23,14 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/ownerdashboard" element={<OwnerDashboard />} />
+          <Route path="/userdashboard" element={<UserDashboard />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/homepage" element={<HomePage />} />
             <Route path="/details" element={<Details />} />
-            <Route path="/ownerpage" element={<OwnerPage />} />
+            
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/contactus" element={<ContactUs />} />
           </Route>
