@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPage from './screens/LandingPage';
@@ -11,6 +10,7 @@ import Details from './screens/Details';
 import OwnerPage from './screens/OwnerPage';
 import AboutUs from './screens/AboutUs';
 import ContactUs from './screens/ContactUs';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   return (
@@ -18,14 +18,19 @@ const App = () => {
       <Header />
       <div className="container-fluid p-0" style={{ maxWidth: '1550px', minHeight: '100vh' }}>
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
-          <Route path="/homepage" element={<HomePage />} />
-          <Route path="/details" element={<Details />} />
-          <Route path="/ownerpage" element={<OwnerPage />} />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/contactus" element={<ContactUs />} />
+
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/details" element={<Details />} />
+            <Route path="/ownerpage" element={<OwnerPage />} />
+            <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/contactus" element={<ContactUs />} />
+          </Route>
         </Routes>
       </div>
       <Footer />

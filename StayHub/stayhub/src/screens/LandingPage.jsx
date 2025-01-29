@@ -10,6 +10,9 @@ import review3 from '../images/review3.svg';
 import review4 from '../images/review4.svg';
 import review5 from '../images/review5.svg';
 import review6 from '../images/review6.svg';
+import block1 from '../images/block1.svg';
+import block2 from '../images/block2.svg';
+import block3 from '../images/block3.svg';
 
 
 
@@ -189,18 +192,18 @@ const slides = [
       </div>
       <div className="col-md-6 d-flex justify-content-center">
         <img
-          src="https://via.placeholder.com/400x300"
+          src={block1}
           alt="Wide Range of PGs"
           className="img-fluid rounded"
         />
       </div>
     </div>
 
-    {/* Block 1: Image Left, Text Right */}
+    {/* Block 2: Image Left, Text Right */}
     <div className="row align-items-center mb-5 py-5">
       <div className="col-md-6 d-flex justify-content-center">
         <img
-          src="https://via.placeholder.com/400x300"
+          src={block2}
           alt="Affordable PGs"
           className="img-fluid rounded"
         />
@@ -211,7 +214,7 @@ const slides = [
       </div>
     </div>
 
-    {/* Block 1: Text Left, Image Right */}
+    {/* Block 3: Text Left, Image Right */}
     <div className="row align-items-center mb-5 py-5">
       <div className="col-md-6 d-flex flex-column align-items-center text-white">
         <h4 className="fs-3">Wide Range of PGs</h4>
@@ -219,7 +222,7 @@ const slides = [
       </div>
       <div className="col-md-6 d-flex justify-content-center">
         <img
-          src="https://via.placeholder.com/400x300"
+          src={block3}
           alt="Wide Range of PGs"
           className="img-fluid rounded"
         />
