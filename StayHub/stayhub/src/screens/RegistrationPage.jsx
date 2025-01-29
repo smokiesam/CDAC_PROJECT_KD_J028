@@ -1,4 +1,4 @@
-// src/screens/RegistrationPage.js
+//src/screens/RegistrationPage.js
 import React, { useState } from 'react';
 import registration_png from '../images/registration_png.png';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ const RegistrationPage = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'Customer', // Default role
+    role: 'Customer',  //Default role
   });
 
   const handleChange = (e) => {

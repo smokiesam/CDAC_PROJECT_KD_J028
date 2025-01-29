@@ -14,9 +14,10 @@ import OwnerDashboard from './screens/OwnerDashboard';
 import UserDashboard from './screens/UserDashboard';
 
 const App = () => {
+  
   return (
     <Router>
-      <Header />
+      <Header/>
       <div className="container-fluid p-0" style={{ maxWidth: '1550px', minHeight: '100vh' }}>
         <Routes>
           {/* Public Routes */}
@@ -35,8 +36,8 @@ const App = () => {
             <Route path="/contactus" element={<ContactUs />} />
           </Route>
         </Routes>
-      </div>
-      <Footer />
+       </div>
+      <Footer/>
     </Router>
   );
 };
