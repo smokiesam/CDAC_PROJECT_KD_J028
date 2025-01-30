@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Card, Button, Form } from "react-bootstrap";
-import { FaUser, FaPlus, FaList } from "react-icons/fa";
+import { FaHome, FaUser, FaPlus, FaList } from "react-icons/fa";
 
 const OwnerDashboard = () => {
   const [selectedSection, setSelectedSection] = useState("profile");
   const [userData, setUserData] = useState(null);
   const [pgList, setPgList] = useState([]);
+
+  const navigate = useNavigate();
 
   // Fetch user details on component mount
   useEffect(() => {
@@ -32,6 +35,15 @@ const OwnerDashboard = () => {
         {/* Left Sidebar */}
         <div className="col-md-3 p-3 bg-light shadow-sm">
           <h4>Owner Dashboard</h4>
+
+          {/* Home Button */}
+          <button
+          className="btn btn-primary w-100 mb-3 d-flex align-items-center justify-content-center"
+          onClick={() => navigate("/homepage")}
+          >
+          <FaHome className="me-2" /> Home
+          </button>                                         
+
           <ul className="list-group">
             <li
               className={`list-group-item ${selectedSection === "profile" ? "active" : ""}`}

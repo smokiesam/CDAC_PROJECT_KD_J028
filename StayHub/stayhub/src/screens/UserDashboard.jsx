@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FaUser, FaHistory, FaCalendarAlt } from "react-icons/fa";
+import { FaUser, FaHistory, FaCalendarAlt, FaHome } from "react-icons/fa";
 import { Card, Spinner, Alert } from "react-bootstrap";
 
 const UserDashboard = () => {
@@ -10,6 +11,8 @@ const UserDashboard = () => {
   const [upcomingBookings, setUpcomingBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  const navigate = useNavigate();
 
   // Fetch user details and bookings from the backend
   useEffect(() => {
@@ -38,6 +41,15 @@ const UserDashboard = () => {
         {/* Left Panel */}
         <div className="col-md-3 p-3 shadow-sm" style={{ backgroundColor: "#f8f9fa" }}>
           <h4 className="mb-3">Dashboard</h4>
+          
+          {/* Home Button */}
+          <button
+            className="btn btn-primary w-100 mb-3 d-flex align-items-center justify-content-center"
+            onClick={() => navigate("/homepage")}
+          >
+            <FaHome className="me-2" /> Home
+          </button>
+
           <ul className="list-group">
             <li
               className={`list-group-item ${selectedSection === "profile" ? "active" : ""}`}
@@ -120,6 +132,5 @@ const UserDashboard = () => {
     </div>
   );
 };
-
 
 export default UserDashboard;

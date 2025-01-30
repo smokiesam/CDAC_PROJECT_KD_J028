@@ -8,12 +8,49 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('Customer'); // Default role
+  const [role, setRole] = useState('USER'); // Default role
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login Submitted:', { email, password, role });
-  };
+
+    try {
+        const response = await fetch('http://localhost:8080/api/auth/login', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email, // Use the state variables
+                password: password,
+                role: role, // Include the role
+            }),
+        });
+
+        if (response.ok) {
+            const data = await response.json(); // Parse the JSON response
+            console.log('Login Successful:', data);
+
+            // Store the token (and role if needed) in local storage or context
+            localStorage.setItem('token', data.token);  // Store the token
+            localStorage.setItem('role', data.role); // Store the role
+
+            // Common page hai dono ke liye (user&owner)
+            navigate('/homepage', { replace: true });
+
+        } else {
+            const errorData = await response.json(); // Parse JSON error response
+            const errorMessage = errorData.message || "Invalid email or password"; // Extract message or default
+
+            // Display error message to the user (e.g., using an alert or a state variable)
+            alert(errorMessage); // Or use a more user-friendly way to display errors
+
+            console.error('Login Failed:', errorMessage);
+        }
+    } catch (error) {
+        console.error('Login Request Error:', error);
+        alert("A network error occurred. Please try again later."); // Handle network errors
+    }
+};
 
   return (
     <div className="container-fluid" style={{ backgroundColor: '#FEF4EA', minHeight: '100vh' }}>
@@ -56,25 +93,25 @@ const LoginPage = () => {
                 <input
                   type="radio"
                   name="role"
-                  value="Customer"
-                  checked={role === 'Customer'}
+                  value="USER"
+                  checked={role === 'USER'}
                   onChange={(e) => setRole(e.target.value)}
                   className="form-check-input"
                   style={{ accentColor: '#FF7700' }}  // Custom color for radio buttons
                 />
-                <label className="form-check-label">Customer</label>
+                <label className="form-check-label">USER</label>
               </div>
               <div className="form-check form-check-inline">
                 <input
                   type="radio"
                   name="role"
-                  value="Owner"
-                  checked={role === 'Owner'}
+                  value="OWNER"
+                  checked={role === 'OWNER'}
                   onChange={(e) => setRole(e.target.value)}
                   className="form-check-input"
                   style={{ accentColor: '#FF7700' }}  // Custom color for radio buttons
                 />
-                <label className="form-check-label">Owner</label>
+                <label className="form-check-label">OWNER</label>
               </div>
             </div>
             {/* Login button with custom color */}

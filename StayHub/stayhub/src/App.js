@@ -12,11 +12,13 @@ import ContactUs from './screens/ContactUs';
 import ProtectedRoute from './components/ProtectedRoute';
 import OwnerDashboard from './screens/OwnerDashboard';
 import UserDashboard from './screens/UserDashboard';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   
   return (
     <Router>
+      <ToastContainer position="top-right" autoClose={3000} />
       <Header/>
       <div className="container-fluid p-0" style={{ maxWidth: '1550px', minHeight: '100vh' }}>
         <Routes>
