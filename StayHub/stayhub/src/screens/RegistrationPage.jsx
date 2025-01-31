@@ -24,22 +24,27 @@ const RegistrationPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
-
+    
         if (formData.password !== formData.confirmPassword) {
             setErrors({ confirmPassword: 'Passwords do not match!' });
             toast.error('Passwords do not match!');
             return;
         }
-
+    
+        // Determine API endpoint based on role
+        const endpoint = formData.role === 'OWNER' 
+            ? 'http://localhost:8080/api/owners/register' 
+            : 'http://localhost:8080/api/users/register';
+    
         try {
-            const response = await fetch('http://localhost:8080/api/users/register', {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
-
+    
             if (response.ok) {
                 toast.success('Registration successful!');
                 navigate('/login');
@@ -55,6 +60,7 @@ const RegistrationPage = () => {
             toast.error('A network error occurred. Please try again later.');
         }
     };
+    
 
     return (
         <div className="container-fluid" style={{ backgroundColor: '#FEF4EA', minHeight: '100vh' }}>
@@ -142,6 +148,34 @@ const RegistrationPage = () => {
                             />
                             {errors.confirmPassword && <div className="text-danger">{errors.confirmPassword}</div>}
                         </div>
+                        <div className="mb-3">
+                                <label className="form-label">Role</label>
+                                <div className="form-check form-check-inline">
+                                    <input
+                                        type="radio"
+                                        name="role"
+                                        value="USER"
+                                        checked={formData.role === 'USER'}
+                                        onChange={handleChange}
+                                        className="form-check-input"
+                                        style={{ accentColor: '#FF7700' }}
+                                    />
+                                    <label className="form-check-label">USER</label>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <input
+                                        type="radio"
+                                        name="role"
+                                        value="OWNER"
+                                        checked={formData.role === 'OWNER'}
+                                        onChange={handleChange}
+                                        className="form-check-input"
+                                        style={{ accentColor: '#FF7700' }}
+                                    />
+                                    <label className="form-check-label">OWNER</label>
+                                </div>
+                                {errors.role && <small className="text-danger">{errors.role}</small>}
+                            </div>
 
                         {errors.general && <div className="alert alert-danger">{errors.general}</div>}
                         <button

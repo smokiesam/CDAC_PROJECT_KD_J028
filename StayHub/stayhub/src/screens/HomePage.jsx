@@ -152,7 +152,6 @@ const faqData = [
     {/* Property Listings######### */}
     {/* Property Listings ######### */}
 <div className="col-lg-7 mt-4">
-  <h2 className="text-center mb-3">🏠 PG Listings</h2>
   <div className="table-responsive shadow-sm p-3 bg-white rounded">
     <table className="table table-bordered table-hover">
       <thead className=" text-center">

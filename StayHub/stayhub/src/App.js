@@ -12,7 +12,7 @@ import ContactUs from './screens/ContactUs';
 import ProtectedRoute from './components/ProtectedRoute';
 import OwnerDashboard from './screens/OwnerDashboard';
 import UserDashboard from './screens/UserDashboard';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify'; 
 
 const App = () => {
   
@@ -26,14 +26,13 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
-          <Route path="/ownerdashboard" element={<OwnerDashboard />} />
-          <Route path="/userdashboard" element={<UserDashboard />} />
 
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/homepage" element={<HomePage />} />
             <Route path="/details" element={<Details />} />
-            
+            <Route path="/ownerdashboard" element={<OwnerDashboard />} />
+            <Route path="/userdashboard" element={<UserDashboard />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/contactus" element={<ContactUs />} />
           </Route>

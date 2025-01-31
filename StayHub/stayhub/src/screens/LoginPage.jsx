@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import login_png from '../images/login_png.png'
+import login_png from '../images/login_png.png';
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from 'react-toastify'; // Make sure you have installed this package
 
 const LoginPage = () => {
-
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,45 +11,43 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-        const response = await fetch('http://localhost:8080/api/auth/login', { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: email, // Use the state variables
-                password: password,
-                role: role, // Include the role
-            }),
-        });
-
-        if (response.ok) {
-            const data = await response.json(); // Parse the JSON response
-            console.log('Login Successful:', data);
-
-            // Store the token (and role if needed) in local storage or context
-            localStorage.setItem('token', data.token);  // Store the token
-            localStorage.setItem('role', data.role); // Store the role
-
-            // Common page hai dono ke liye (user&owner)
-            navigate('/homepage', { replace: true });
-
-        } else {
-            const errorData = await response.json(); // Parse JSON error response
-            const errorMessage = errorData.message || "Invalid email or password"; // Extract message or default
-
-            // Display error message to the user (e.g., using an alert or a state variable)
-            alert(errorMessage); // Or use a more user-friendly way to display errors
-
-            console.error('Login Failed:', errorMessage);
-        }
+      const loginUrl = role === 'OWNER' 
+        ? 'http://localhost:8080/api/auth/login/owner' 
+        : 'http://localhost:8080/api/auth/login/user';
+  
+      const response = await fetch(loginUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);  // Store JWT token
+  
+        // Decode JWT token to get role
+        const decodedToken = JSON.parse(atob(data.token.split('.')[1]));
+        const userRole = decodedToken.role;
+        localStorage.setItem('role', userRole);
+  
+        toast.success('Login successful!');
+  
+        navigate('/homepage');  
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData?.message || 'Invalid credentials');
+      }
     } catch (error) {
-        console.error('Login Request Error:', error);
-        alert("A network error occurred. Please try again later."); // Handle network errors
+      console.error('Login request failed:', error);
+      toast.error('A network error occurred. Please try again later.');
     }
-};
+  };
+  
+  
 
   return (
     <div className="container-fluid" style={{ backgroundColor: '#FEF4EA', minHeight: '100vh' }}>
@@ -114,6 +111,7 @@ const LoginPage = () => {
                 <label className="form-check-label">OWNER</label>
               </div>
             </div>
+
             {/* Login button with custom color */}
             <button
               type="submit"
@@ -123,7 +121,7 @@ const LoginPage = () => {
               Login
             </button>
             <p className="mt-3 text-center">
-              Don’t have an account? 
+              Don’t have an account?
               <button
                 onClick={() => navigate('/registration')}
                 className="btn btn-link text-primary p-0"
@@ -141,7 +139,7 @@ const LoginPage = () => {
             src={login_png}  // Image path
             alt="Login Illustration"
             className="img-fluid rounded"
-            style={{ height: '100%', objectFit: 'cover',transform: 'translateY(35px)'  }}
+            style={{ height: '100%', objectFit: 'cover', transform: 'translateY(35px)' }}
           />
         </div>
       </div>
