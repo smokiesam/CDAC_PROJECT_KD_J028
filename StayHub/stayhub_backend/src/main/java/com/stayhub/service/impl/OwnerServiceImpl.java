@@ -28,4 +28,9 @@ public class OwnerServiceImpl implements OwnerService {
         ownerRepository.save(owner);
         return "Owner registered successfully";
     }
+    
+    @Override
+    public Owner getOwnerProfileByEmail(String email) {
+        return ownerRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Owner not found"));
+    }
 }
