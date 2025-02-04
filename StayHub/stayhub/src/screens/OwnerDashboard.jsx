@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Card, Button, Form } from "react-bootstrap";
+import { Card, Button, Form, Modal } from "react-bootstrap";
 import { FaHome, FaUser, FaPlus, FaList, FaEdit, FaTrash } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 const OwnerDashboard = () => {
   const [selectedSection, setSelectedSection] = useState("profile");
@@ -13,6 +12,8 @@ const OwnerDashboard = () => {
   const [pgList, setPgList] = useState([]);
   const [pgData, setPgData] = useState({ name: "", location: "", rent: "" });
   const [ownerEmail, setOwnerEmail] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false); // State to control edit modal
+  const [selectedPg, setSelectedPg] = useState(null); // State to store the selected PG for editing
 
   const navigate = useNavigate();
 
@@ -97,24 +98,62 @@ const OwnerDashboard = () => {
   };
 
   const handleDeletePg = async (pgId) => {
-    try {
-      const response = await axios.delete(`http://localhost:8080/api/owner/delete-pg?pgId=${pgId}&email=${ownerEmail}`);
-      if (response.status === 200) {
-        toast.success("PG deleted successfully!");
-        fetchPgs();
-      } else {
-        toast.error("Failed to delete PG. Unexpected response.");
-      }
-    } catch (error) {
-      console.error("Error deleting PG:", error.response?.data || error.message);
-      toast.error(error.response?.data?.message || "Failed to delete PG. Please try again.");
+  try {
+    const response = await axios.delete(`http://localhost:8080/api/owner/delete-pg/${pgId}?email=${ownerEmail}`); // Use PG ID here
+    if (response.status === 200) {
+      toast.success("PG deleted successfully!");
+      fetchPgs();
+    } else {
+      toast.error("Failed to delete PG. Unexpected response.");
     }
-  };
+  } catch (error) {
+    console.error("Error deleting PG:", error.response?.data || error.message);
+    toast.error(error.response?.data?.message || "Failed to delete PG. Please try again.");
+  }
+};
+
 
   const handleEditPg = (pg) => {
-    //edit ka code baaki hai
-    console.log("Edit PG:", pg);
+    setSelectedPg(pg); // Set the selected PG for editing
+    setShowEditModal(true); // Open the edit modal
   };
+
+  const handleUpdatePg = async (e) => {
+    e.preventDefault();
+  
+    if (!ownerEmail || !selectedPg) {
+      toast.error("User not logged in or PG not selected.");
+      return;
+    }
+  
+    const { id, name, location, rent } = selectedPg;
+    if (!name || !location || !rent || isNaN(rent)) {
+      toast.error("All fields are required, and rent must be a valid number.");
+      return;
+    }
+  
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/owner/update-pg/${id}?email=${ownerEmail}`, // Use PG ID here
+        { name, location, rent },
+        { headers: { "Content-Type": "application/json" } }
+      );
+  
+      if (response.status === 200) {
+        toast.success("PG updated successfully!");
+        fetchPgs();
+        setShowEditModal(false); // Close the modal
+      } else {
+        toast.error("Unexpected response from the server.");
+      }
+    } catch (error) {
+      console.error("Error updating PG:", error.response?.data || error.message);
+      if (error.response && error.response.status >= 400) {
+        toast.error(error.response?.data?.message || "Failed to update PG. Please try again.");
+      }
+    }
+  };
+  
 
   return (
     <div className="container-fluid mt-4">
@@ -219,6 +258,50 @@ const OwnerDashboard = () => {
           )}
         </div>
       </div>
+
+      {/* Edit PG Modal */}
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit PG</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedPg && (
+            <Form onSubmit={handleUpdatePg}>
+              <Form.Group className="mb-3">
+                <Form.Label>PG Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={selectedPg.name}
+                  onChange={(e) => setSelectedPg({ ...selectedPg, name: e.target.value })}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Location</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="location"
+                  value={selectedPg.location}
+                  onChange={(e) => setSelectedPg({ ...selectedPg, location: e.target.value })}
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Rent (per month)</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="rent"
+                  value={selectedPg.rent}
+                  onChange={(e) => setSelectedPg({ ...selectedPg, rent: e.target.value })}
+                />
+              </Form.Group>
+
+              <Button variant="primary" type="submit">Update PG</Button>
+            </Form>
+          )}
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
