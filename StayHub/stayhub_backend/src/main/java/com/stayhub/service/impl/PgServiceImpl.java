@@ -22,7 +22,7 @@ public class PgServiceImpl implements PgService {
     private OwnerRepository ownerRepository;
 
     @Override
-    public Pg addPg(PgDto pgDto, String ownerEmail) { // Match the interface method
+    public Pg addPg(PgDto pgDto, String ownerEmail) { 
         Owner owner = ownerRepository.findByEmail(ownerEmail)
                 .orElseThrow(() -> new RuntimeException("Owner not found"));
 
@@ -57,7 +57,7 @@ public class PgServiceImpl implements PgService {
             Pg pg = pgOptional.get();
 
             if (pg.getOwner().getEmail().equals(ownerEmail)) {
-                pgRepository.delete(pg); // Hard delete
+                pgRepository.delete(pg); 
                 return true;
             }
         }
