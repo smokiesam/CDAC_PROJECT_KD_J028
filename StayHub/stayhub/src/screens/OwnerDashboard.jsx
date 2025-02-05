@@ -99,7 +99,7 @@ const OwnerDashboard = () => {
 
   const handleDeletePg = async (pgId) => {
   try {
-    const response = await axios.delete(`http://localhost:8080/api/owner/delete-pg/${pgId}?email=${ownerEmail}`); // Use PG ID here
+    const response = await axios.delete(`http://localhost:8080/api/owner/delete-pg?pgId=${pgId}&email=${ownerEmail}`);
     if (response.status === 200) {
       toast.success("PG deleted successfully!");
       fetchPgs();
