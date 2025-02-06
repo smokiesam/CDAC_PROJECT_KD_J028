@@ -5,19 +5,21 @@ import menuImage from '../images/menunew.svg';
 import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { jwtDecode } from 'jwt-decode';
 
 const DetailsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [pg, setPg] = useState(location.state?.pg || {}); 
-  const userEmail = localStorage.getItem("email"); 
+  const [pg, setPg] = useState(location.state?.pg || {});
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
 
   useEffect(() => {
-    if (!pg.id) {
+    if (!pg.id && location.state?.pgId) {
       const fetchPgDetails = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/api/pgs/${pg.id}`); 
-          setPg(response.data); 
+          const response = await axios.get(`http://localhost:8080/api/pgs/${location.state.pgId}`);
+          setPg(response.data);
         } catch (error) {
           console.error("Error fetching PG details:", error);
           toast.error("Error fetching PG details. Please try again.");
@@ -25,68 +27,73 @@ const DetailsPage = () => {
       };
       fetchPgDetails();
     }
-  }, [pg.id]);
+  }, [pg.id, location.state]);
 
-  const handlePayment = async () => {
-    try {
-      const orderResponse = await axios.post("http://localhost:8080/api/payments/create-order", {
-        amount: pg.rent * 100,
-        currency: "INR",
-        userEmail: userEmail,
+  const handleBooking = async (e) => {
+  e.preventDefault();
+
+  if (!checkIn || !checkOut) {
+    toast.error("Please select check-in and check-out dates.");
+    return;
+  }
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    toast.error("User not logged in. Please login first.");
+    return;
+  }
+
+  try {
+    const decodedToken = jwtDecode(token);
+    const userEmail = decodedToken.sub; // Ensure this matches your backend's JWT payload structure
+
+    const response = await axios.post(
+      "http://localhost:8080/api/bookings/create",
+      {
+        userEmail, // Now dynamically extracted
         pgId: pg.id,
-        pgName: pg.name
-      });
+        checkInDate: checkIn,
+        checkOutDate: checkOut,
+        amountPaid: pg.rent,
+      }
+    );
 
-      const { orderId, key } = orderResponse.data;
-
-      const options = {
-        key: key,
-        amount: pg.rent * 100,
-        currency: "INR",
-        name: "StayHub",
-        description: `Booking for ${pg.name}`,
-        order_id: orderId,
-        handler: async function (response) {
-          await axios.post("http://localhost:8080/api/bookings/confirm", {
-            paymentId: response.razorpay_payment_id,
-            orderId: orderId,
-            userEmail: userEmail,
-            pgId: pg.id,
-            pgName: pg.name,
-            amount: pg.rent
-          });
-
-          navigate("/paymentsuccessful");
-          setTimeout(() => {
-            navigate("/");
-          }, 3000);
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
-
-      const rzp = new window.Razorpay(options);
-      rzp.open();
-    } catch (error) {
-      console.error("Payment failed:", error);
-      toast.error("Payment failed. Please try again.");
+    if (response.status === 200) {
+      toast.success("Booking successful!");
+      setTimeout(() => navigate("/paymentsuccessful"), 1000);
     }
-  };
+  } catch (error) {
+    console.error("Booking failed:", error);
+    toast.error("Booking failed. Please try again.");
+  }
+};
+
 
   return (
     <div className="container my-4">
-      <Button variant="secondary" className="mb-3" onClick={() => navigate(-1)}>← Back</Button>
+      <Button variant="secondary" className="mb-3" onClick={() => navigate(-1)}>
+        ← Back
+      </Button>
 
       <div className="row">
         <div className="col-md-8">
           <div id="carouselExample" className="carousel slide" data-bs-ride="carousel" data-bs-interval="1000">
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src={require("../images/detailspagecrousel2.png")} alt="PG1" className="img-fluid rounded carousel-img" style={{ height: '100%', objectFit: 'cover' }} />
+                <img
+                  src={require("../images/detailspagecrousel2.png")}
+                  alt="PG1"
+                  className="img-fluid rounded carousel-img"
+                  style={{ height: "100%", objectFit: "cover" }}
+                />
               </div>
               <div className="carousel-item">
-                <img src={require("../images/detailspagecrousel2.png")} alt="PG2" className="img-fluid rounded carousel-img" style={{ height: '100%', objectFit: 'cover' }} />
+                <img
+                  src={require("../images/detailspagecrousel2.png")}
+                  alt="PG2"
+                  className="img-fluid rounded carousel-img"
+                  style={{ height: "100%", objectFit: "cover" }}
+                />
               </div>
             </div>
             <a className="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
@@ -144,19 +151,14 @@ const DetailsPage = () => {
         <div className="col-md-4" style={{ position: "sticky", top: "0", left: "0", zIndex: "10", height: "100vh", maxWidth: "400px" }}>
           <div className="border p-4 bg-light rounded">
             <h3 className="text-center">Reserve Now</h3>
-            <Form>
+            <Form onSubmit={handleBooking}>
               <div className="mb-3">
-                <input type="text" className="form-control" id="name" placeholder="Enter your name" required />
+                <label>Check-in:</label>
+                <input type="date" className="form-control" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} required />
               </div>
               <div className="mb-3">
-                <input type="text" className="form-control" id="phone" placeholder="Enter your phone number" required />
-              </div>
-              <div className="mb-3">
-                <select className="form-select">
-                  <option value="">Select Occupancy</option>
-                  <option value="single">Single</option>
-                  <option value="double">Double</option>
-                </select>
+                <label>Check-out:</label>
+                <input type="date" className="form-control" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} required />
               </div>
               <div className="form-check mb-3">
                 <input type="checkbox" className="form-check-input" required />
@@ -164,7 +166,9 @@ const DetailsPage = () => {
                   I agree to the <a href="/terms-and-conditions" className="text-primary">terms & conditions</a>.
                 </label>
               </div>
-              <Button variant="primary" type="submit" onClick={handlePayment}>Reserve Now/ Pay Now!</Button>
+              <Button variant="primary" type="submit">
+                Reserve Now
+              </Button>
             </Form>
           </div>
         </div>

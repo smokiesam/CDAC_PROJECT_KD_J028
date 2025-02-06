@@ -13,6 +13,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import OwnerDashboard from './screens/OwnerDashboard';
 import UserDashboard from './screens/UserDashboard';
 import { ToastContainer } from 'react-toastify'; 
+import PaymentSuccessfulPage from './screens/PaymentSuccessfulPage';
 
 const App = () => {
   
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/userdashboard" element={<UserDashboard />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/contactus" element={<ContactUs />} />
+            <Route path="/paymentsuccessful" element={<PaymentSuccessfulPage />} />
           </Route>
         </Routes>
        </div>
