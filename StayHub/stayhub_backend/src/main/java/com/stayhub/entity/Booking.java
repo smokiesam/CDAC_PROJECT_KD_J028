@@ -31,5 +31,9 @@ public class Booking extends BaseEntity {
     private double amountPaid;
 
     @Enumerated(EnumType.STRING)
-    private BookingStatus status;  // PENDING, CONFIRMED, CANCELLED
+    private BookingStatus status;  // PENDING, CONFIRMED, REJECTED
+    
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 }

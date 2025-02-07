@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Card, Button, Form, Modal } from "react-bootstrap";
-import { FaUser, FaPlus, FaList, FaEdit, FaTrash } from "react-icons/fa";
+import { Card, Button, Form, Modal, Table } from "react-bootstrap";
+import { FaUser, FaPlus, FaList, FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -12,8 +12,9 @@ const OwnerDashboard = () => {
   const [pgList, setPgList] = useState([]);
   const [pgData, setPgData] = useState({ name: "", location: "", rent: "" });
   const [ownerEmail, setOwnerEmail] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(false); // State to control edit modal
-  const [selectedPg, setSelectedPg] = useState(null); // State to store the selected PG for editing
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedPg, setSelectedPg] = useState(null);
+  const [pendingBookings, setPendingBookings] = useState([]); // State to store pending bookings
 
   const navigate = useNavigate();
 
@@ -43,11 +44,24 @@ const OwnerDashboard = () => {
     }
   }, [ownerEmail]);
 
+  const fetchPendingBookings = useCallback(async () => {
+    if (!ownerEmail) return;
+    try {
+      const response = await axios.get(`http://localhost:8080/api/owner/bookings/pending?email=${ownerEmail}`);
+      setPendingBookings(response.data || []);
+    } catch (error) {
+      console.error("Error fetching pending bookings:", error);
+      setPendingBookings([]);
+    }
+  }, [ownerEmail]);
+
   useEffect(() => {
     if (selectedSection === "manage-pgs") {
       fetchPgs();
+    } else if (selectedSection === "manage-bookings") {
+      fetchPendingBookings();
     }
-  }, [selectedSection, fetchPgs]);
+  }, [selectedSection, fetchPgs, fetchPendingBookings]);
 
   useEffect(() => {
     if (selectedSection === "profile" && ownerEmail) {
@@ -98,51 +112,50 @@ const OwnerDashboard = () => {
   };
 
   const handleDeletePg = async (pgId) => {
-  try {
-    const response = await axios.delete(`http://localhost:8080/api/owner/delete-pg?pgId=${pgId}&email=${ownerEmail}`);
-    if (response.status === 200) {
-      toast.success("PG deleted successfully!");
-      fetchPgs();
-    } else {
-      toast.error("Failed to delete PG. Unexpected response.");
+    try {
+      const response = await axios.delete(`http://localhost:8080/api/owner/delete-pg?pgId=${pgId}&email=${ownerEmail}`);
+      if (response.status === 200) {
+        toast.success("PG deleted successfully!");
+        fetchPgs();
+      } else {
+        toast.error("Failed to delete PG. Unexpected response.");
+      }
+    } catch (error) {
+      console.error("Error deleting PG:", error.response?.data || error.message);
+      toast.error(error.response?.data?.message || "Failed to delete PG. Please try again.");
     }
-  } catch (error) {
-    console.error("Error deleting PG:", error.response?.data || error.message);
-    toast.error(error.response?.data?.message || "Failed to delete PG. Please try again.");
-  }
-};
-
+  };
 
   const handleEditPg = (pg) => {
-    setSelectedPg(pg); // Set the selected PG for editing
-    setShowEditModal(true); // Open the edit modal
+    setSelectedPg(pg);
+    setShowEditModal(true);
   };
 
   const handleUpdatePg = async (e) => {
     e.preventDefault();
-  
+
     if (!ownerEmail || !selectedPg) {
       toast.error("User not logged in or PG not selected.");
       return;
     }
-  
+
     const { id, name, location, rent } = selectedPg;
     if (!name || !location || !rent || isNaN(rent)) {
       toast.error("All fields are required, and rent must be a valid number.");
       return;
     }
-  
+
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/owner/update-pg/${id}?email=${ownerEmail}`, // Use PG ID here
+        `http://localhost:8080/api/owner/update-pg/${id}?email=${ownerEmail}`,
         { name, location, rent },
         { headers: { "Content-Type": "application/json" } }
       );
-  
+
       if (response.status === 200) {
         toast.success("PG updated successfully!");
         fetchPgs();
-        setShowEditModal(false); // Close the modal
+        setShowEditModal(false);
       } else {
         toast.error("Unexpected response from the server.");
       }
@@ -153,7 +166,42 @@ const OwnerDashboard = () => {
       }
     }
   };
-  
+
+  const handleApproveBooking = async (bookingId) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/bookings/${bookingId}/status/APPROVED`
+      );
+
+      if (response.status === 200) {
+        toast.success("Booking approved successfully!");
+        fetchPendingBookings(); // Refresh pending bookings
+      } else {
+        toast.error("Failed to approve booking.");
+      }
+    } catch (error) {
+      console.error("Error approving booking:", error);
+      toast.error("Failed to approve booking. Please try again.");
+    }
+  };
+
+  const handleRejectBooking = async (bookingId) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/bookings/${bookingId}/status/REJECTED`
+      );
+
+      if (response.status === 200) {
+        toast.success("Booking rejected successfully!");
+        fetchPendingBookings(); // Refresh pending bookings
+      } else {
+        toast.error("Failed to reject booking.");
+      }
+    } catch (error) {
+      console.error("Error rejecting booking:", error);
+      toast.error("Failed to reject booking. Please try again.");
+    }
+  };
 
   return (
     <div className="container-fluid mt-4">
@@ -162,10 +210,6 @@ const OwnerDashboard = () => {
         <div className="col-md-3 p-3 bg-light shadow-sm">
           <h4>Owner Dashboard</h4>
           <Button variant="secondary" className="mb-3" onClick={() => navigate(-1)}>← Back</Button>
-          {/* <button className="btn btn-primary w-100 mb-3" onClick={() => navigate("/homepage")}>
-            <FaHome className="me-2" /> Home
-          </button> */}
-
           <ul className="list-group">
             <li className={`list-group-item ${selectedSection === "profile" ? "active" : ""}`} onClick={() => setSelectedSection("profile")} style={{ cursor: "pointer" }}>
               <FaUser className="me-2" /> Profile
@@ -175,6 +219,9 @@ const OwnerDashboard = () => {
             </li>
             <li className={`list-group-item ${selectedSection === "manage-pgs" ? "active" : ""}`} onClick={() => setSelectedSection("manage-pgs")} style={{ cursor: "pointer" }}>
               <FaList className="me-2" /> Manage PGs
+            </li>
+            <li className={`list-group-item ${selectedSection === "manage-bookings" ? "active" : ""}`} onClick={() => setSelectedSection("manage-bookings")} style={{ cursor: "pointer" }}>
+              <FaList className="me-2" /> Manage Bookings
             </li>
           </ul>
         </div>
@@ -224,7 +271,7 @@ const OwnerDashboard = () => {
               <Card.Body>
                 <Card.Title><FaList className="me-2" /> Manage PGs</Card.Title>
                 {pgList.length > 0 ? (
-                  <table className="table table-striped table-hover">
+                  <Table striped bordered hover>
                     <thead>
                       <tr>
                         <th>PG Name</th>
@@ -250,9 +297,50 @@ const OwnerDashboard = () => {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </Table>
                 ) : (
                   <p>No PGs found.</p>
+                )}
+              </Card.Body>
+            </Card>
+          )}
+
+        {selectedSection === "manage-bookings" && (
+            <Card className="p-4">
+              <Card.Body>
+                <Card.Title><FaList className="me-2" /> Manage Bookings</Card.Title>
+                {pendingBookings.length > 0 ? (
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Booking ID</th>
+                        <th>PG Name</th>
+                        <th>User Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {pendingBookings.map((booking, index) => (
+                        <tr key={index}>
+                          <td>{booking.id}</td>
+                          <td>{booking.pgName}</td>
+                          <td>{booking.userEmail}</td>
+                          <td>{booking.status}</td>
+                          <td>
+                            <Button variant="success" className="me-2" onClick={() => handleApproveBooking(booking.id)}>
+                              <FaCheck /> Approve
+                            </Button>
+                            <Button variant="danger" onClick={() => handleRejectBooking(booking.id)}>
+                              <FaTimes /> Reject
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                ) : (
+                  <p>No pending bookings found.</p>
                 )}
               </Card.Body>
             </Card>

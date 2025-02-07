@@ -2,11 +2,16 @@ package com.stayhub.service.impl;
 
 import com.stayhub.entity.Booking;
 import com.stayhub.entity.User;
+import com.stayhub.enums.BookingStatus;
+import com.stayhub.exception.ResourceNotFoundException;
 import com.stayhub.entity.Pg;
 import com.stayhub.repository.BookingRepository;
 import com.stayhub.repository.UserRepository;
 import com.stayhub.repository.PgRepository;
 import com.stayhub.service.BookingService;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,4 +65,48 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getPGBookings(Long pgId) {
         return bookingRepository.findByPgId(pgId);
     }
+    
+    @Override
+    public List<Booking> getPendingBookingsForOwner(String ownerEmail) {
+        List<Booking> bookings = bookingRepository.findPendingBookingsByOwnerEmail(ownerEmail);
+        if (bookings.isEmpty()) {
+            throw new ResourceNotFoundException("No pending bookings found for owner with email: " + ownerEmail);
+        }
+        return bookings;
+    }
+
+    
+    public List<Booking> findPendingBookingsByOwnerEmail(String email) {
+        return bookingRepository.findPendingBookingsByOwnerEmail(email);
+    }
+    
+    @Override
+    public void approveBooking(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
+
+        if (booking.getStatus().equals(BookingStatus.APPROVED)) {
+            throw new IllegalStateException("Booking is already approved");
+        }
+
+        booking.setStatus(BookingStatus.APPROVED);
+        bookingRepository.save(booking);
+    }
+    
+    @Override
+    public Booking getBookingById(Long bookingId) {
+        return bookingRepository.findById(bookingId)
+            .orElseThrow(() -> new ResourceNotFoundException("Booking not found with ID: " + bookingId));
+    }
+
+    @Override
+    @Transactional
+    public void updateBookingStatus(Long bookingId, BookingStatus status) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + bookingId));
+
+        booking.setStatus(status);
+        bookingRepository.save(booking);
+    }
+    
 }

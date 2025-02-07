@@ -1,5 +1,7 @@
 package com.stayhub.entity;
 
+import java.util.List;
+
 import com.stayhub.enums.Role;
 
 import jakarta.persistence.*;

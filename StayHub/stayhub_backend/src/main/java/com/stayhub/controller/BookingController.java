@@ -1,8 +1,10 @@
 package com.stayhub.controller;
 
 import com.stayhub.entity.Booking;
+import com.stayhub.enums.BookingStatus;
 import com.stayhub.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,5 +39,16 @@ public class BookingController {
     @GetMapping("/pg/{pgId}")
     public List<Booking> getPGBookings(@PathVariable Long pgId) {
         return bookingService.getPGBookings(pgId);
+    }
+    
+    @PutMapping("/{bookingId}/status/{status}")
+    public ResponseEntity<String> updateBookingStatus(@PathVariable Long bookingId, @PathVariable String status) {
+        try {
+            BookingStatus bookingStatus = BookingStatus.valueOf(status.toUpperCase());
+            bookingService.updateBookingStatus(bookingId, bookingStatus);
+            return ResponseEntity.ok("Booking status updated to: " + status);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid status value.");
+        }
     }
 }
