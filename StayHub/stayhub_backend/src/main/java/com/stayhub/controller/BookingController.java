@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,12 @@ public class BookingController {
     @GetMapping("/user/{email}")
     public List<Booking> getUserBookings(@PathVariable String email) {
         return bookingService.getUserBookings(email);
+    }
+    
+    @GetMapping("/booking-date/{bookingId}")
+    public ResponseEntity<LocalDateTime> getBookingDate(@PathVariable Long bookingId) {
+        LocalDateTime bookingDate = bookingService.getBookingDate(bookingId);
+        return ResponseEntity.ok(bookingDate);
     }
 
     @GetMapping("/pg/{pgId}")

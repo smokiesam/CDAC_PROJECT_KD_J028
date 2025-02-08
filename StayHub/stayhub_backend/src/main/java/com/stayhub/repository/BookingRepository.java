@@ -15,4 +15,5 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Query("SELECT b FROM Booking b JOIN b.pg p JOIN p.owner o WHERE o.email = :email AND b.status = 'PENDING'")
     List<Booking> findPendingBookingsByOwnerEmail(@Param("email") String email);
     List<Booking> findByOwnerIdAndStatus(Long ownerId, BookingStatus status);
+    List<Booking> findByUserEmail(String email);
 }

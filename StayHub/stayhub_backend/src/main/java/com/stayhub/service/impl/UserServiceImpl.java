@@ -1,5 +1,6 @@
 package com.stayhub.service.impl;
 
+import com.stayhub.dto.ProfileResponseDto;
 import com.stayhub.dto.UserDto;
 import com.stayhub.entity.User;
 import com.stayhub.enums.Role;
@@ -58,5 +59,30 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(user);
     }
+    
+//    @Override
+//    public UserDto getUserProfile(String email) {
+//        User user = userRepository.findByEmail(email)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        UserDto userDto = new UserDto();
+//        userDto.setFirstName(user.getFirstName());
+//        userDto.setLastName(user.getLastName());
+//        userDto.setEmail(user.getEmail());
+//        return userDto;
+//    }
+    
+    @Override
+    public ProfileResponseDto getUserProfile(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        ProfileResponseDto profileResponseDto = new ProfileResponseDto();
+        profileResponseDto.setFirstName(user.getFirstName());
+        profileResponseDto.setLastName(user.getLastName());
+        profileResponseDto.setEmail(user.getEmail());
+        return profileResponseDto;
+    }
+
 
 }

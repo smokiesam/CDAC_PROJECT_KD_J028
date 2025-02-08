@@ -1,5 +1,6 @@
 package com.stayhub.controller;
 
+import com.stayhub.dto.ProfileResponseDto;
 import com.stayhub.dto.UserDto;
 import org.springframework.http.HttpStatus; // Import HttpStatus
 import org.springframework.http.ResponseEntity; // Import ResponseEntity
@@ -23,4 +24,11 @@ public class UserController {
         userService.registerUser(userDto);
         return new ResponseEntity<>("User registered successfully!", HttpStatus.CREATED); // Use ResponseEntity
     }
+    
+    @GetMapping("/profile")
+    public ResponseEntity<ProfileResponseDto> getUserProfile(@RequestParam("email") String email) {
+        ProfileResponseDto profileResponseDto = userService.getUserProfile(email);
+        return ResponseEntity.ok(profileResponseDto);
+    }
+
 }

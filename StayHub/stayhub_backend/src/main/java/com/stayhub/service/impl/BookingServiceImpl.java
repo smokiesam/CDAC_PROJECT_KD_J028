@@ -15,6 +15,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,13 @@ public class BookingServiceImpl implements BookingService {
             throw new RuntimeException("User not found");
         }
         return bookingRepository.findByUserId(userOptional.get().getId());
+    }
+    
+    @Override
+    public LocalDateTime getBookingDate(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+        return booking.getCreatedOn();
     }
 
     @Override
@@ -107,6 +115,11 @@ public class BookingServiceImpl implements BookingService {
 
         booking.setStatus(status);
         bookingRepository.save(booking);
+    }
+    
+    @Override
+    public List<Booking> getAllBookingsByUserEmail(String email) {
+        return bookingRepository.findByUserEmail(email);
     }
     
 }

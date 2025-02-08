@@ -3,6 +3,7 @@ package com.stayhub.service;
 import com.stayhub.entity.Booking;
 import com.stayhub.enums.BookingStatus;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingService {
@@ -14,4 +15,6 @@ public interface BookingService {
     void approveBooking(Long bookingId);
     public Booking getBookingById(Long bookingId);
     void updateBookingStatus(Long bookingId, BookingStatus status);
+    List<Booking> getAllBookingsByUserEmail(String email);
+    LocalDateTime getBookingDate(Long bookingId);
 }
