@@ -13,8 +13,15 @@ const DetailsPage = () => {
   const [pg, setPg] = useState(location.state?.pg || {});
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
+  const [role, setRole] = useState(""); // State to store role
 
   useEffect(() => {
+    // Retrieve role from localStorage
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setRole(storedRole);
+    }
+
     if (!pg.id && location.state?.pgId) {
       const fetchPgDetails = async () => {
         try {
@@ -30,44 +37,43 @@ const DetailsPage = () => {
   }, [pg.id, location.state]);
 
   const handleBooking = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!checkIn || !checkOut) {
-    toast.error("Please select check-in and check-out dates.");
-    return;
-  }
-
-  const token = localStorage.getItem("token");
-  if (!token) {
-    toast.error("User not logged in. Please login first.");
-    return;
-  }
-
-  try {
-    const decodedToken = jwtDecode(token);
-    const userEmail = decodedToken.sub; // Ensure this matches your backend's JWT payload structure
-
-    const response = await axios.post(
-      "http://localhost:8080/api/bookings/create",
-      {
-        userEmail, // Now dynamically extracted
-        pgId: pg.id,
-        checkInDate: checkIn,
-        checkOutDate: checkOut,
-        amountPaid: pg.rent,
-      }
-    );
-
-    if (response.status === 200) {
-      toast.success("Booking successful!");
-      setTimeout(() => navigate("/paymentsuccessful"), 1000);
+    if (!checkIn || !checkOut) {
+      toast.error("Please select check-in and check-out dates.");
+      return;
     }
-  } catch (error) {
-    console.error("Booking failed:", error);
-    toast.error("Booking failed. Please try again.");
-  }
-};
 
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("User not logged in. Please login first.");
+      return;
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);
+      const userEmail = decodedToken.sub; // Ensure this matches your backend's JWT payload structure
+
+      const response = await axios.post(
+        "http://localhost:8080/api/bookings/create",
+        {
+          userEmail, // Now dynamically extracted
+          pgId: pg.id,
+          checkInDate: checkIn,
+          checkOutDate: checkOut,
+          amountPaid: pg.rent,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Booking successful!");
+        setTimeout(() => navigate("/paymentsuccessful"), 1000);
+      }
+    } catch (error) {
+      console.error("Booking failed:", error);
+      toast.error("Booking failed. Please try again.");
+    }
+  };
 
   return (
     <div className="container my-4">
@@ -166,7 +172,7 @@ const DetailsPage = () => {
                   I agree to the <a href="/terms-and-conditions" className="text-primary">terms & conditions</a>.
                 </label>
               </div>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" disabled={role === "OWNER"}>
                 Reserve Now
               </Button>
             </Form>
