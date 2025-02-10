@@ -16,10 +16,10 @@ const PaymentSuccessfulPage = () => {
       className="d-flex justify-content-between align-items-center"
       style={{
         backgroundColor: "#FEF4EA",
-        height: "100vh", // Full page height
-        margin: 0, // Remove default margin
-        padding: 0, // Remove default padding
-        overflow: "hidden", // Prevent scrollbars
+        height: "100vh", 
+        margin: 0, 
+        padding: 0, 
+        overflow: "hidden", 
       }}
     >
       {/* Payment Card - Left Side */}
@@ -28,7 +28,7 @@ const PaymentSuccessfulPage = () => {
         style={{
           maxWidth: "400px",
           border: "1px solid #eee",
-          marginLeft: "35%", // Add space on the left
+          marginLeft: "35%", 
         }}
       >
         <div className="text-success mb-4 d-flex justify-content-center">
@@ -61,7 +61,7 @@ const PaymentSuccessfulPage = () => {
           className="img-fluid"
           style={{
             maxWidth: "500px",
-            transform: 'translateY(138px)', // Adjust size as needed
+            transform: 'translateY(138px)', 
           }}
         />
       </div>

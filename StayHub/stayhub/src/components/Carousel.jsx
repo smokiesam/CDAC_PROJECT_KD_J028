@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules'; // Correct import for modules
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'; 
 
 // Swiper styles
 import 'swiper/css';

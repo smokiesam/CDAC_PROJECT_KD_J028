@@ -26,8 +26,8 @@
 }
 
 .dropdown-menu {
-  z-index: 1050 !important; /* Higher than the map */
-  position: absolute !important; /* Ensure it doesn't affect layout */
+  z-index: 1050 !important; 
+  position: absolute !important; 
   background-color: white; 
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
 }
@@ -73,14 +73,14 @@
 /* Prevent wrapping of the filter buttons */
 .d-flex.flex-nowrap {
   flex-wrap: nowrap;
-  overflow-x: auto; /* Allow horizontal scroll if buttons don't fit */
+  overflow-x: auto; 
 }
 .carousel-item img {
   height: 200px;
   object-fit: cover;
 }
 .carousel-image-container {
-  height: 100px; /* Adjust this value to make images smaller or larger */
+  height: 100px; 
   overflow: hidden;
 }
 
@@ -110,5 +110,5 @@
 }
 
 .filter-btn:hover {
-  background-color: #e66a00 !important; /* Slightly darker on hover */
+  background-color: #e66a00 !important; 
 }

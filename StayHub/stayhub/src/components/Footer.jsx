@@ -30,7 +30,7 @@ const Footer = () => {
             <h5>Contact Us</h5>
             <p>Email: support@stayhub.com</p>
             <p>Phone: +1 234 567 890</p>
-            <p>Address: 123 StayHub Lane, City, Country</p>
+            <p>Address: 123 StayHub, Sunbeam Karad, Maharashtra.</p>
           </div>
 
           {/* Social Media Section */}

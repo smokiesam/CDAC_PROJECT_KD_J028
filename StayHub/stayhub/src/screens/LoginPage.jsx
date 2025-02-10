@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import login_png from '../images/login_png.png';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify'; // Make sure you have installed this package
+import { toast } from 'react-toastify'; 
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -136,7 +136,7 @@ const LoginPage = () => {
         {/* Right Column (Image/Picture) */}
         <div className="col-md-6 col-12 d-none d-md-block">
           <img
-            src={login_png}  // Image path
+            src={login_png} 
             alt="Login Illustration"
             className="img-fluid rounded"
             style={{ height: '100%', objectFit: 'cover', transform: 'translateY(35px)' }}
