@@ -1,47 +1,24 @@
-# CDAC_PROJECT_KD_J028
-Cdac Final Project : Stay Hub
-
 # StayHub
 
-StayHub is a user-friendly platform designed to help individuals find and book nearby Paying Guest (PG) accommodations. PG owners can list their properties, while users can search for PGs, register, book, give reviews, provide feedback, and contact owners. This project aims to streamline the accommodation discovery and booking process.
+StayHub is a platform that helps people find and book Paying Guest (PG) accommodations easily. PG owners can list their properties, while users can search for PGs, register, book stays, leave reviews, and contact owners.
 
-## Project Overview
+## Features
 
-### Key Features:
-- **User Functionalities:**
-  - Search for PG accommodations.
-  - Register, login, and manage their profiles.
-  - Book PGs, give reviews, and provide feedback.
+### For Users:
+- Search for PG accommodations.
+- Register, log in, and manage profiles.
+- Book PGs and leave reviews.
 
-- **Owner Functionalities:**
-  - Register and log in to the platform.
-  - Post PG details and update amenities.
-  - View feedback and manage bookings.
+### For PG Owners:
+- Register and log in.
+- List and update PG details.
+- View and manage bookings.
 
-### Tech Stack:
-- **Frontend:** React.js (current phase: UI implementation)
-- **Backend:** Node.js/Express.js (future development)
-- **Database:** MySQL (normalized to the first normal form)
-- **Other Tools:** Docker, Git, and other DevOps tools
-
-## Current Status
-We are currently in the **UI Implementation Phase**, starting with the frontend development using React.
-
-## Folder Structure
-The project follows a modular and organized folder structure for scalability and maintainability:
-
-```
-StayHub
-├── public
-├── src
-│   ├── components   # Reusable components (e.g., buttons, headers, footers)
-│   ├── screens      # All page components (e.g., LandingPage, LoginPage)
-│   ├── App.js       # Main React app component
-│   ├── index.js     # Entry point for React app
-│   └── assets       # Static files (e.g., images, icons, styles)
-├── package.json
-└── README.md
-```
+## Tech Stack
+- **Frontend:** React.js
+- **Backend:** Spring Boot (Java) with JWT authentication
+- **Database:** MySQL
+- **Other Tools:** Docker, Git, Swagger for API documentation
 
 ## How to Run Locally
 1. Clone the repository:
@@ -54,43 +31,59 @@ StayHub
    cd stayhub
    ```
 
-3. Install dependencies:
+3. Install frontend dependencies:
    ```bash
    yarn install
    ```
 
-4. Start the development server:
+4. Start the frontend:
    ```bash
    yarn start
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Run the backend (Spring Boot):
+   - Import the project into **STS4** or **IntelliJ IDEA**.
+   - Configure **MySQL** and update `application.properties`.
+   - Run the Spring Boot application.
 
-## Pages Under Development
-- **Landing Page:** Showcases StayHub's mission with a prominent login button.
-- **Login Page:** Allows users to log in to their accounts.
-- **Registration Page:** Enables new users to register.
+6. Open [http://localhost:3000](http://localhost:3000) for the frontend.
 
-## Contribution
-Feel free to raise issues or suggest enhancements through pull requests. Follow these steps:
+## Folder Structure
+```
+StayHub
+├── backend         # Spring Boot backend
+│   ├── src/main    # Main source code
+│   ├── pom.xml     # Maven dependencies
+│   └── ...
+├── frontend        # React.js frontend
+│   ├── src
+│   │   ├── components  # Reusable UI elements
+│   │   ├── pages       # Screens like Home, Login, Registration
+│   │   ├── App.js      # Main React app file
+│   │   ├── index.js    # Entry point
+│   ├── public         # Static assets
+│   ├── package.json   # Frontend dependencies
+└── README.md
+```
+
+## Contribution Guide
+Want to contribute? Follow these steps:
 1. Fork the repository.
-2. Create a new branch for your feature/bugfix:
+2. Create a new branch:
    ```bash
    git checkout -b feature-name
    ```
-3. Commit your changes:
+3. Make your changes and commit:
    ```bash
-   git commit -m "Added feature XYZ"
+   git commit -m "Added new feature"
    ```
-4. Push to the branch:
+4. Push your changes:
    ```bash
    git push origin feature-name
    ```
 5. Open a pull request.
 
 ---
-
-**StayHub Team**
-
+**StayHub Team**  
 Happy coding! 🚀
 
