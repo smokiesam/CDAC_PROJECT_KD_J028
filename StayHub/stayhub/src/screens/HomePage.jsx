@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import '../styles/HomePage.css';
 import { useNavigate } from "react-router-dom";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 import crouselimage from '../images/pglistcrouselnew1.png';
 import crouselimage2 from '../images/pglistcrouselnew2.png';
@@ -62,10 +64,20 @@ const HomePage = () => {
     { id: 3, image: crouselimage3 },
   ];
 
+  useEffect(() => {
+    const carousel = document.querySelector("#mainCarousel");
+    if (carousel) {
+      new window.bootstrap.Carousel(carousel, {
+        interval: 3000,
+        ride: "carousel",
+      });
+    }
+  }, []);
+
   return (
     <div className="container-fluid p-4">
       {/* Carousel Section */}
-      <div id="mainCarousel" className="carousel slide" data-bs-ride="carousel">
+      <div id="mainCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div className="carousel-indicators">
           {carouselItems.map((item, index) => (
             <button

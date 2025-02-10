@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../images/logo.png';
-import { Dropdown } from 'react-bootstrap'; 
+import { Dropdown } from 'react-bootstrap';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ const Header = () => {
 
             <li className="nav-item dropdown">
               <Dropdown>
-                <Dropdown.Toggle id="dropdown-basic" style={{ backgroundColor: '#FF7700', color:'white' }}>
+                <Dropdown.Toggle id="support-btn" variant="dark">
                   Support
                 </Dropdown.Toggle>
 
@@ -73,14 +73,18 @@ const Header = () => {
             {isLoggedIn ? (
               <li className="nav-item dropdown">
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ backgroundColor: '#FF7700'}}>
-                    <i className="fas fa-user-circle me-2" style={{ fontSize:'23px'}} ></i>
+                  <Dropdown.Toggle id="user-btn" variant="dark">
+                  <i className="fas fa-user-circle me-2" 
+  style={{ fontSize: '30px', color: '#FF7700' }} // Orange user icon
+></i>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     <Dropdown.Item>Hi, {username}</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item onClick={() => navigate(userRole === 'USER' ? '/userdashboard' : '/ownerdashboard')}>Dashboard</Dropdown.Item>
+                    <Dropdown.Item onClick={() => navigate(userRole === 'USER' ? '/userdashboard' : '/ownerdashboard')}>
+                      Dashboard
+                    </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
@@ -104,4 +108,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header;

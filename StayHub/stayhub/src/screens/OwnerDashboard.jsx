@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Card, Button, Form, Modal, Table } from "react-bootstrap";
-import { FaUser, FaPlus, FaList, FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
+import { FaHome,FaUser, FaPlus, FaList, FaEdit, FaTrash, FaCheck, FaTimes } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -208,8 +208,14 @@ const OwnerDashboard = () => {
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       <div className="row">
         <div className="col-md-3 p-3 bg-light shadow-sm">
+        <Button variant="secondary" className="mb-3" onClick={() => navigate(-1)}>← Back</Button>
           <h4>Owner Dashboard</h4>
-          <Button variant="secondary" className="mb-3" onClick={() => navigate(-1)}>← Back</Button>
+          <button
+            className="btn btn-primary w-100 mb-3 d-flex align-items-center justify-content-center"
+            onClick={() => navigate("/homepage")}
+          >
+            <FaHome className="me-2" /> Home
+          </button>
           <ul className="list-group">
             <li className={`list-group-item ${selectedSection === "profile" ? "active" : ""}`} onClick={() => setSelectedSection("profile")} style={{ cursor: "pointer" }}>
               <FaUser className="me-2" /> Profile
